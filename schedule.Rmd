@@ -1,0 +1,286 @@
+---
+title: "Schedule"
+---
+
+**Click on the text like "Week 1: Jan 22 -- 25" to expand or collapse the items we covered in that week.**
+
+I will fill in more detail and provide links to lecture notes and labs as we go along.  Items for future dates are tentative and subject to change.
+
+```{r, echo = FALSE}
+make_week_box <- function(id, open, title, contents) {
+  cat('
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingOne">
+<h5 class="mb-0">
+<a data-toggle="collapse" href="#',
+id,
+'" aria-expanded="true" aria-controls="collapseOne">
+',
+title,
+'</a>
+</h5>
+</div>
+
+<div id="',
+id,
+'" class="collapse',
+ifelse(open, " in", ""),
+'">
+<div class="panel-body">
+',
+contents,
+'
+</div>
+</div>
+</div>',
+  sep = "")
+}
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week1", TRUE, "Week 1: Jan 22 -- 25",
+"
+* Introduction; review of topics from probability and calculus; getting started with R
+
+#### Wed, Jan 23
+
+ * **In class**, we will work on: Introduction and Chapter 1
+    * Discuss the syllabus; course overview.
+    * Foundations of statistical inference; Chapter 1 of the Statistical Sleuth.  [pdf](materials/20190123_intro/foundations_inference.pdf)
+ * **After class**, please do the following:
+    * **Register for GitHub** [here](https://github.com) if you haven't already; I will ask you to provide your GitHub user name in the questionairre below.
+    * **Fill out** a brief [questionnairre](https://goo.gl/forms/Z0nYaD3IxOx25Jum2)
+    * **Fill out** this brief [poll about when my office hours should be held](http://whenisgood.net/n4ahdz3)
+    * **Sign up** for our class at Piazza (anonymous question and answer forum): [https://piazza.com/mtholyoke/spring2019/stat242](https://piazza.com/mtholyoke/spring2019/stat242)
+    * **Reading**
+      * Read Chapter 1 and Sections 2.1 and 2.2 of our book.
+
+#### Fri, Jan 25
+ * **In class**, we will work on: Sections 2.1 and 2.2
+    * $t$-based inference for a single mean or a difference between two means with paired data.
+    * Set up git to work with RStudio.
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week2", FALSE, "Week 2: Jan 28 -- Feb 1",
+"
+Sections 7.1 through 7.3
+
+Simple random samples, sampling distributions, bias, variance, mean squared error, a first look at confidence intervals.
+
+(See Stat 344SM, survey sampling, for the rest of Chapter 7 and much more)
+
+#### Mon, Jan 28
+ * **In Class**, we will do the following:
+
+#### Wed, Jan 30
+ * **In Class**, we will do the following:
+
+#### Fri, Feb 1
+ * **In Class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week3", FALSE, "Week 3: Feb 4 -- 8",
+"
+
+#### Mon, Feb 4
+ * **In Class**, we will do the following:
+
+#### Wed, Feb 6
+ * **In Class**, we will do the following:
+
+#### Fri, Feb 8
+ * **In class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week4", FALSE, "Week 4: Feb 11 -- 15",
+"
+
+#### Mon, Feb 11
+ * **In class**, we will do the following:
+
+#### Wed, Feb 13
+ * **In class**, we will do the following:
+
+#### Fri, Feb 15
+ * **In class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week5", FALSE, "Week 5: Feb 18 -- 22",
+"
+
+#### Mon, Feb 18
+ * **In class**, we will do the following:
+
+#### Wed, Feb 20
+ * **In class**, we will do the following:
+
+#### Fri, Feb 22
+ * **In class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week6", FALSE, "Week 6: Feb 25 -- Mar 1",
+"
+
+#### Mon, Feb 25
+ * **In class**, we will do the following:
+
+#### Wed, Feb 27
+ * **In class**, we will do the following:
+
+#### Fri, Mar 1
+ * **In class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
+"
+
+#### Mon, Mar 4
+ * **In class**, we will do the following:
+
+#### Wed, Mar 6
+ * **In class**, we will do the following:
+
+#### Fri, Mar 8
+ * **In class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week8", FALSE, "Week 8: Mar 11 -- 15",
+"
+#### Spring Break: safe travels!
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week9", FALSE, "Week 9: Mar 18 -- 22",
+"
+
+#### Mon, Mar 18
+ * **In class**, we will do the following:
+
+#### Wed, Mar 20
+ * **In class**, we will do the following:
+
+#### Fri, Mar 22
+ * **In class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week10", FALSE, "Week 10: Mar 25 -- 29",
+"
+
+#### Mon, Mar 15
+ * **In class**, we will do the following:
+
+#### Wed, Mar 27
+ * **In Class**, we will do the following:
+
+#### Fri, Mar 29
+ * **In Class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
+"
+
+#### Mon, Apr 1
+ * **In Class**, we will do the following:
+
+#### Tue, Apr 3
+ * **In Class**, we will do the following:
+
+#### Fri, Apr 5
+ * **In Class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week12", FALSE, "Week 12: Apr 8 -- 12",
+"
+
+#### Mon, Apr 8
+ * **In Class**, we will do the following:
+
+#### Wed, Apr 10
+ * **In Class**, we will do the following:
+
+#### Fri, Apr 12
+ * **In Class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week13", FALSE, "Week 13: Apr 15 -- 19",
+"
+
+#### Mon, Apr 15
+ * **In Class**, we will do the following:
+
+#### Wed, Apr 17
+ * **In Class**, we will do the following:
+
+#### Fri, Apr 19
+ * **In Class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week14", FALSE, "Week 14: Apr 22 -- 26",
+"
+
+#### Mon, Apr 22
+ * **In Class**, we will do the following:
+
+#### Wed, Apr 24
+ * **In Class**, we will do the following:
+
+#### Fri, Apr 26
+ * **In Class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week15", FALSE, "Week 15: Apr 29 -- 30",
+"
+
+#### Mon, Apr 29
+ * **In Class**, we will do the following:
+"
+  )
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("finals", TRUE, "Final Exams: Fri, May 3 at 7pm -- Tue, May 7 at noon",
+"We will have a cumulative final exam.
+"
+  )
+```
