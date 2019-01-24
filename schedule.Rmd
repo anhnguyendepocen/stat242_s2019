@@ -63,11 +63,9 @@ make_week_box("week1", TRUE, "Week 1: Jan 22 -- 25",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week2", FALSE, "Week 2: Jan 28 -- Feb 1",
+make_week_box("week2", TRUE, "Week 2: Jan 28 -- Feb 1",
 "
 Chapter 2
-
-(See Stat 344SM, survey sampling, for the rest of Chapter 7 and much more)
 
 #### Mon, Jan 28
  * **In Class**, we will do the following: Sections 2.1 and 2.2
