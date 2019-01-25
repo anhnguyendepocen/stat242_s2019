@@ -5,9 +5,18 @@ title: "Homework"
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
 | Assignment # | Description                                   | Due Date  | Value | Solutions                                          |
 +==============+===============================================+===========+=======+====================================================+
-|    0 (HW0)   | Data Camp Course to be assigned by Thursday   | 1/30/2019 |  0.5  |                                                    |
-|              | 1/26/2019                                     |           |       |                                                    |
+|    0 (HW0)   | Data Camp assignments.                        | 1/30/2019 |  0.5  |                                                    |
+|              | If you have                                   |           |       |                                                    |
+|              | already done these assignments for another    |           |       |                                                    |
+|              | course, you don't need to do them again - but |           |       |                                                    |
+|              | you might want to take another look and       |           |       |                                                    |
+|              | review any parts you are not fully comfortable|           |       |                                                    |
+|              | with. If you haven't seen this before, this   |           |       |                                                    |
+|              | material may feel overwhelming.  Don't worry, |           |       |                                                    |
+|              | we will talk about all of this material in    |           |       |                                                    |
+|              | more depth in future classes. This is a first |           |       |                                                    |
+|              | pass.                                         |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
-|    1 (HW1)   | Assignment posted on GitHub                   | 2/1/2019  |  1    |                                                    |
+|    1 (HW1)   | Assignment posted on GitHub by Friday night   | 2/1/2019  |  1    |                                                    |
 |              |                                               |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
