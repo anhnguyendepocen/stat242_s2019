@@ -40,7 +40,7 @@ contents,
 ```{r, echo = FALSE, results='asis'}
 make_week_box("week1", TRUE, "Week 1: Jan 22 -- 25",
 "
-* Introduction; review of topics from your intro. statistics course; getting started with R
+* Introduction; review of topics from our intro. statistics course; getting started with R
 
 #### Wed, Jan 23
 
@@ -52,12 +52,17 @@ make_week_box("week1", TRUE, "Week 1: Jan 22 -- 25",
     * **Fill out** a brief [questionnairre](https://goo.gl/forms/Z0nYaD3IxOx25Jum2)
     * **Fill out** this brief [poll about when my office hours should be held](http://whenisgood.net/n4ahdz3)
     * **Sign up** for our class at Piazza (anonymous question and answer forum): [https://piazza.com/mtholyoke/spring2019/stat242](https://piazza.com/mtholyoke/spring2019/stat242)
-    * **Reading**
-      * Read Chapter 1 and Sections 2.1 and 2.2 of our book.
+    * **Read** Chapter 1 and Sections 2.1 and 2.2 of our book.
 
 #### Fri, Jan 25
  * **In class**, we will work on: Chapter 1
     * Finish lab/example from day 1; a first look at R
+    * Look over quizzes on material from Chapter 1
+    * If you have extra time, start working through the data camp assignment
+ * **After class**, please do the following:
+    * **Homework 0** is on DataCamp, due Wed Jan 30.
+    * Start working on **Homework 1**, due Fri Feb 1.
+    * **Read** Chapter 1 and Sections 2.1 and 2.2 of our book.
 "
   )
 ```
@@ -70,12 +75,24 @@ Chapter 2
 #### Mon, Jan 28
  * **In Class**, we will do the following: Sections 2.1 and 2.2
     * $t$-based inference for a single mean or a difference between two means with paired data.
+    * **Quiz**
+ * **After class**, please do the following:
+    * **Homework 0** is on DataCamp, due Wed Jan 30.
+    * Start working on **Homework 1**, due Fri Feb 1.
+    * **Read** Chapter 1 and Sections 2.1 and 2.2 of our book.
 
 #### Wed, Jan 30
- * **In Class**, we will do the following:
+ * **In Class**, we will do the following: Sections 2.3 and 2.4
+    * $t$-based inference for difference between two means with unpaired data.
+    * **Quiz**
+ * **After class**, please do the following:
+    * Work on **Homework 1**, due Friday Feb 1.
 
 #### Fri, Feb 1
  * **In Class**, we will do the following:
+    * Finish any remaining material from Mon and Wed
+ * **After class**, please do the following:
+    * Work on **Homework 2**, due Friday Feb 8.
 "
   )
 ```
