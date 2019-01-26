@@ -2,6 +2,10 @@
 title: "Homework"
 ---
 
+Here's a guide to getting homework assignments that are on GitHub into RStudio: [pdf](resources/Stat242-github-setup.pdf)
+
+I realize that this is kindof a pain!  Let me know if you run into any problems with this.  I'll add instructions for homework submission later.
+
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
 | Assignment # | Description                                   | Due Date  | Value | Solutions                                          |
 +==============+===============================================+===========+=======+====================================================+
@@ -17,6 +21,9 @@ title: "Homework"
 |              | more depth in future classes. This is a first |           |       |                                                    |
 |              | pass.                                         |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
-|    1 (HW1)   | Assignment posted on GitHub by Friday night   | 2/1/2019  |  1    |                                                    |
+|              | Use the instructions above to pull the        |           |       |                                                    |
+|              | assignment into RStudio using this link for   |           |       |                                                    |
+|              | the repository URL in step 6:                 |           |       |                                                    |
+|    1 (HW1)   | https://github.com/mhc-stat242-s2019/HW1.git  | 2/1/2019  |  1    |                                                    |
 |              |                                               |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
