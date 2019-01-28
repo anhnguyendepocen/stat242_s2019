@@ -38,7 +38,7 @@ contents,
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week1", TRUE, "Week 1: Jan 22 -- 25",
+make_week_box("week1", FALSE, "Week 1: Jan 22 -- 25",
 "
 * Introduction; review of topics from our intro. statistics course; getting started with R
 
@@ -73,24 +73,27 @@ make_week_box("week2", TRUE, "Week 2: Jan 28 -- Feb 1",
 Chapter 2
 
 #### Mon, Jan 28
- * **In Class**, we will do the following: Sections 2.1 and 2.2
-    * $t$-based inference for a single mean or a difference between two means with paired data.
+ * **In Class**, we will do the following: Start on Sections 2.1, 2.2, and 2.5
     * **Quiz**
+    * t-based inference for a single mean or a difference between two means with paired data.
+        * Overview of concepts behind $t$ tests and confidence intervals [pdf](materials/20190128_t/t_summary.pdf)
+        * Examples of $t$ tests and confidence intervals [pdf](materials/20190128_t/t.pdf)
  * **After class**, please do the following:
     * **Homework 0** is on DataCamp, due Wed Jan 30.
     * Start working on **Homework 1**, due Fri Feb 1.
     * **Read** Chapter 1 and Sections 2.1 and 2.2 of our book.
 
 #### Wed, Jan 30
- * **In Class**, we will do the following: Sections 2.3 and 2.4
-    * $t$-based inference for difference between two means with unpaired data.
+ * **In Class**, we will do the following: Finish Sections 2.1, 2.2, and 2.5
     * **Quiz**
+    * Finish working through the handouts from Monday.
  * **After class**, please do the following:
     * Work on **Homework 1**, due Friday Feb 1.
 
 #### Fri, Feb 1
  * **In Class**, we will do the following:
-    * Finish any remaining material from Mon and Wed
+    * **Quiz**
+    * Either start on Chapter 5, or look at plots in ggplot2
  * **After class**, please do the following:
     * Work on **Homework 2**, due Friday Feb 8.
 "
