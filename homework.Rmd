@@ -6,7 +6,7 @@ Here's a guide to getting homework assignments that are on GitHub into RStudio: 
 
 Here's a guide to getting homework assignments from RStudio into Gradescope: [pdf](homework/hw_submission/Stat242-hw-submission.pdf)
 
-I realize that this is kindof a pain!  Let me know if you run into any problems with this.  I'll add instructions for homework submission later.
+I realize that this is kindof a pain!  Let me know if you run into any problems with this.
 
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
 | Assignment # | Description                                   | Due Date  | Value | Solutions                                          |
