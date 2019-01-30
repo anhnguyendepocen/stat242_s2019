@@ -92,8 +92,8 @@ Chapter 2
 
 #### Fri, Feb 1
  * **In Class**, we will do the following:
-    * **Quiz**
-    * Either start on Chapter 5, or look at plots in ggplot2
+    * **No Quiz**
+    * Finish working through the handouts from Monday and Wednesday.
  * **After class**, please do the following:
     * Work on **Homework 2**, due Friday Feb 8.
 "
