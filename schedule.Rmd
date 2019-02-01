@@ -101,17 +101,27 @@ Chapter 2
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week3", FALSE, "Week 3: Feb 4 -- 8",
+make_week_box("week3", TRUE, "Week 3: Feb 4 -- 8",
 "
 
 #### Mon, Feb 4
  * **In Class**, we will do the following:
+    * **Quiz** on material from Chapter 1
+    * Discuss material from Chapter 5
+ * **After class**, please do the following:
+    * Work on **Homework 2**, due Friday Feb 8.
 
 #### Wed, Feb 6
  * **In Class**, we will do the following:
+    * **Quiz** on material from Chapter 2
+    * Discuss material from Chapter 5
+ * **After class**, please do the following:
+    * Work on **Homework 2**, due Friday Feb 8.
 
 #### Fri, Feb 8
  * **In class**, we will do the following:
+    * **Quiz** on material from Chapter 2
+    * Discuss material from Chapter 5
 "
   )
 ```
