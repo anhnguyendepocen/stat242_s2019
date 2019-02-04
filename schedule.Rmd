@@ -68,7 +68,7 @@ make_week_box("week1", FALSE, "Week 1: Jan 22 -- 25",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week2", TRUE, "Week 2: Jan 28 -- Feb 1",
+make_week_box("week2", FALSE, "Week 2: Jan 28 -- Feb 1",
 "
 Chapter 2
 
@@ -107,37 +107,43 @@ make_week_box("week3", TRUE, "Week 3: Feb 4 -- 8",
 #### Mon, Feb 4
  * **In Class**, we will do the following:
     * **Quiz** on material from Chapter 1
-    * Discuss material from Chapter 5
+    * Discuss material from Sections 5.2 and 6.2
  * **After class**, please do the following:
     * Work on **Homework 2**, due Friday Feb 8.
 
 #### Wed, Feb 6
  * **In Class**, we will do the following:
     * **Quiz** on material from Chapter 2
-    * Discuss material from Chapter 5
+    * Finish material from Sections 5.2 and 6.2, or move on to Section 5.3
  * **After class**, please do the following:
     * Work on **Homework 2**, due Friday Feb 8.
 
 #### Fri, Feb 8
  * **In class**, we will do the following:
-    * **Quiz** on material from Chapter 2
-    * Discuss material from Chapter 5
+    * **Quiz** on material from Chapter 1 or Chapter 2
+    * Discuss material from Sections 5.3 and 5.4
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week4", FALSE, "Week 4: Feb 11 -- 15",
+make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
 "
 
 #### Mon, Feb 11
  * **In class**, we will do the following:
+    * **Quiz** on material from Chapters 1, 2, or Sections 5.2 and 6.2
+    * Discuss material from Sections 5.3 and 5.4, or move on to Section 5.5 and Chapter 3
 
 #### Wed, Feb 13
  * **In class**, we will do the following:
+    * **Quiz** on material from Chapters 1, 2, or Sections 5.2 and 6.2
+    * Discuss material from Sections 5.3 and 5.4, or move on to Section 5.5 and Chapter 3
 
 #### Fri, Feb 15
  * **In class**, we will do the following:
+    * **Quiz** on material from Chapters 1, 2, or Sections 5.2 and 6.2
+    * Discuss material from Section 5.5 and Chapter 3
 "
   )
 ```
