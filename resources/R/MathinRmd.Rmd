@@ -17,7 +17,7 @@ td
 
 ## Math inside RMarkdown
 
-You may want to include "math" like greek symbols, etc., in your R Markdown documents.  In this class, this is totally optional.  If you want a $\mu$ in your document, you can just type "mu" instead and forget about the extra complication.  However, this document describes how to put math into your write up in case you want to.  It will definitely look nicer that way :)
+You may want to include math like greek symbols, etc., in your R Markdown documents.  In this class, this is totally optional.  If you want a $\mu$ in your document, you can just type "mu" instead and forget about the extra complication.  However, this document describes how to put math into your write up in case you want to.  It will definitely look nicer that way :)
 
 In a text chunk, you can use mathematical notation if you surround it by 
 dollar signs `$` for inline mathematics  and `$$` for displayed equations.
