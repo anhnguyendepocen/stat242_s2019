@@ -107,21 +107,24 @@ make_week_box("week3", TRUE, "Week 3: Feb 4 -- 8",
 #### Mon, Feb 4
  * **In Class**, we will do the following:
     * **Quiz** on material from Chapter 1
-    * Discuss material from Sections 5.2 and 6.2
+    * Degrees of freedom
+        * All you really need to know is that degrees of freedom is sample size minus number of parameters for the mean
+        * More detail here: [pdf](materials/20190204_anova/degrees_of_freedom.pdf)
+    * Discuss material from Sections 2.3, 5.2 and 6.2.  [pdf](materials/20190204_anova/anova_pairwise.pdf)
  * **After class**, please do the following:
     * Work on **Homework 2**, due Friday Feb 8.
 
 #### Wed, Feb 6
  * **In Class**, we will do the following:
     * **Quiz** on material from Chapter 2
-    * Material from Sections 5.2 and 6.2, or move on to Section 5.3
+    * Material from Sections 2.3, 5.2 and 6.2
  * **After class**, please do the following:
     * Work on **Homework 2**, due Friday Feb 8.
 
 #### Fri, Feb 8
  * **In class**, we will do the following:
     * **Quiz** on material from Chapter 1 or Chapter 2
-    * Material from Sections 5.2 and 6.2
+    * Material from Sections 2.3, 5.2 and 6.2
 "
   )
 ```
@@ -132,8 +135,9 @@ make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
 
 #### Mon, Feb 11
  * **In class**, we will do the following:
-    * **Quiz** on material from Chapter 1, Chapter 2, or Sections 5.2 and 6.2
-    * Discuss material from Sections 5.3 and 5.4
+    * **Quiz** on material from Chapter 1 or Chapter 2; **not** on Sections 5.2 and 6.2
+    * Wrap up material from Sections 2.3, 5.2, and 6.2
+    * Possibly also start on material from Section 5.3??
 
 #### Wed, Feb 13
  * **In class**, we will do the following:
@@ -143,7 +147,7 @@ make_week_box("week4", TRUE, "Week 4: Feb 11 -- 15",
 #### Fri, Feb 15
  * **In class**, we will do the following:
     * **Quiz** on material from Chapter 1, Chapter 2, or Sections 5.2 and 6.2
-    * Discuss material from Section 5.5 and Chapter 3
+    * Discuss material from Sections 5.3 and 5.4
 "
   )
 ```
@@ -154,12 +158,15 @@ make_week_box("week5", FALSE, "Week 5: Feb 18 -- 22",
 
 #### Mon, Feb 18
  * **In class**, we will do the following:
+    * Discuss material from Section 5.5 and Chapter 3
 
 #### Wed, Feb 20
  * **In class**, we will do the following:
+    * Discuss material from Section 5.5 and Chapter 3
 
 #### Fri, Feb 22
  * **In class**, we will do the following:
+    * Discuss material from Section 5.5 and Chapter 3
 "
   )
 ```
