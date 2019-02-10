@@ -35,3 +35,9 @@ I realize that this is kindof a pain!  Let me know if you run into any problems 
 |    2 (HW2)   | https://github.com/mhc-stat242-s2019/HW2.git  |           |  1    |                                                    |
 |              |                                               |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
+|              | Use the instructions above to pull the        |           |       |                                                    |
+|              | assignment into RStudio using this link for   | Midnight, |       |                                                    |
+|              | the repository URL in step 6:                 | 2/15/2019 |       |                                                    |
+|    3 (HW3)   | https://github.com/mhc-stat242-s2019/HW3.git  |           |  1    |                                                    |
+|              |                                               |           |       |                                                    |
++--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
