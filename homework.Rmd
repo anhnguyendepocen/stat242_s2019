@@ -8,36 +8,36 @@ Here's a guide to getting homework assignments from RStudio into Gradescope: [pd
 
 I realize that this is kindof a pain!  Let me know if you run into any problems with this.
 
-+--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
-| Assignment # | Description                                   | Due Date  | Value | Solutions                                          |
-+==============+===============================================+===========+=======+====================================================+
-|    0 (HW0)   | Data Camp assignments.                        | 1/30/2019 |  0.5  |                                                    |
-|              | If you have                                   |           |       |                                                    |
-|              | already done these assignments for another    |           |       |                                                    |
-|              | course, you don't need to do them again - but |           |       |                                                    |
-|              | you might want to take another look and       |           |       |                                                    |
-|              | review any parts you are not fully comfortable|           |       |                                                    |
-|              | with. If you haven't seen this before, this   |           |       |                                                    |
-|              | material may feel overwhelming.  Don't worry, |           |       |                                                    |
-|              | we will talk about all of this material in    |           |       |                                                    |
-|              | more depth in future classes. This is a first |           |       |                                                    |
-|              | pass.                                         |           |       |                                                    |
-+--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
-|              | Use the instructions above to pull the        |           |       |                                                    |
-|              | assignment into RStudio using this link for   |           |       |                                                    |
-|              | the repository URL in step 6:                 |           |       |                                                    |
-|    1 (HW1)   | https://github.com/mhc-stat242-s2019/HW1.git  | 2/1/2019  |  1    |                                                    |
-|              |                                               |           |       |                                                    |
-+--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
-|              | Use the instructions above to pull the        |           |       |                                                    |
-|              | assignment into RStudio using this link for   | Midnight, |       |                                                    |
-|              | the repository URL in step 6:                 | 2/8/2019  |       |                                                    |
-|    2 (HW2)   | https://github.com/mhc-stat242-s2019/HW2.git  |           |  1    |                                                    |
-|              |                                               |           |       |                                                    |
-+--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
-|              | Use the instructions above to pull the        |           |       |                                                    |
-|              | assignment into RStudio using this link for   | Midnight, |       |                                                    |
-|              | the repository URL in step 6:                 | 2/15/2019 |       |                                                    |
-|    3 (HW3)   | https://github.com/mhc-stat242-s2019/HW3.git  |           |  1    |                                                    |
-|              |                                               |           |       |                                                    |
-+--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
++--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
+| Assignment # | Description                                   | Due Date  | Value | Solutions                                              |
++==============+===============================================+===========+=======+========================================================+
+|    0 (HW0)   | Data Camp assignments.                        | 1/30/2019 |  0.5  |                                                        |
+|              | If you have                                   |           |       |                                                        |
+|              | already done these assignments for another    |           |       |                                                        |
+|              | course, you don't need to do them again - but |           |       |                                                        |
+|              | you might want to take another look and       |           |       |                                                        |
+|              | review any parts you are not fully comfortable|           |       |                                                        |
+|              | with. If you haven't seen this before, this   |           |       |                                                        |
+|              | material may feel overwhelming.  Don't worry, |           |       |                                                        |
+|              | we will talk about all of this material in    |           |       |                                                        |
+|              | more depth in future classes. This is a first |           |       |                                                        |
+|              | pass.                                         |           |       |                                                        |
++--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
+|              | Use the instructions above to pull the        |           |       |https://github.com/mhc-stat242-s2019/HW1_solutions.git  |
+|              | assignment into RStudio using this link for   |           |       |                                                        |
+|              | the repository URL in step 6:                 |           |       |                                                        |
+|    1 (HW1)   | https://github.com/mhc-stat242-s2019/HW1.git  | 2/1/2019  |  1    |                                                        |
+|              |                                               |           |       |                                                        |
++--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
+|              | Use the instructions above to pull the        |           |       |                                                        |
+|              | assignment into RStudio using this link for   | Midnight, |       |                                                        |
+|              | the repository URL in step 6:                 | 2/8/2019  |       |                                                        |
+|    2 (HW2)   | https://github.com/mhc-stat242-s2019/HW2.git  |           |  1    |                                                        |
+|              |                                               |           |       |                                                        |
++--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
+|              | Use the instructions above to pull the        |           |       |                                                        |
+|              | assignment into RStudio using this link for   | Midnight, |       |                                                        |
+|              | the repository URL in step 6:                 | 2/15/2019 |       |                                                        |
+|    3 (HW3)   | https://github.com/mhc-stat242-s2019/HW3.git  |           |  1    |                                                        |
+|              |                                               |           |       |                                                        |
++--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
