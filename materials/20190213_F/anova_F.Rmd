@@ -1,0 +1,320 @@
+---
+title: "F tests for ANOVA (Sleuth3 Section 5.3)"
+output:
+  pdf_document:
+    fig_height: 2.8
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{multirow}
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+```{r, message = FALSE, echo = FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(mosaic)
+options("pillar.sigfig" = 10) # print 10 significant digits in summarize output
+```
+
+# Iris Flowers Example
+
+We have measurements of the characteristics of iris flowers, from each of three different species.  To make it possible to do some calculations by hand in a bit, I have subset to just 5 flowers from each species.
+
+#### The ANOVA Model
+
+ * We have $I$ groups ($I = 3$ for iris example)
+ * Total sample size $n$ ($n = 15$ for iris example with reduced sample size)
+ * Observations in group $i$ follow a Normal($\mu_i$, $\sigma^2$) distribution
+    * (Potentially) different mean for each group
+    * Same variance across all groups
+ * All observations are independent of each other: knowing that one is above its group mean doesn't tell you whether or not another is above its group mean.
+
+#### Parameters:
+
+$\mu_{1}$ = Average sepal width among all setosa flowers (in the region where the flowers in the sample were found?)
+
+$\mu_{2}$ = Average sepal width among all versicolor flowers (in the region where the flowers in the sample were found?)
+
+$\mu_{3}$ = Average sepal width among all virginica flowers (in the region where the flowers in the sample were found?)
+
+#### Theoretical model:
+
+```{r, echo = FALSE, fig.height = 1.5, fig.width = 7}
+x_grid <- seq(from = 1, to = 5, length = 101)
+group_sd <- 0.33
+
+plot_df <- data.frame(
+  x = rep(x_grid, 3),
+  y = c(dnorm(x_grid, mean = 3.3, sd = group_sd),
+        dnorm(x_grid, mean = 2.7, sd = group_sd),
+        dnorm(x_grid, mean = 2.8, sd = group_sd)),
+  group = rep(c("Group 1: mean = 3.3, sd = 0.33", "Group 2: mean = 2.7, sd = 0.33", "Group 3: mean = 2.80, sd = 0.33"),
+    each = length(x_grid))
+)
+
+plot_means <- data.frame(
+  group = c("Group 1: mean = 3.3, sd = 0.33", "Group 2: mean = 2.7, sd = 0.33", "Group 3: mean = 2.80, sd = 0.33"),
+  mean = c(3.3, 2.7, 2.8)
+)
+
+ggplot(data = plot_df, mapping = aes(x = x, y = y, color = group)) +
+  geom_line() +
+  geom_vline(data = plot_means, mapping = aes(xintercept = mean, color = group)) +
+  xlim(c(1, 5))
+```
+
+#### Compare to the plot for our iris data:
+
+```{r, fig.height = 1.5, echo = FALSE, fig.width = 5.8}
+set.seed(1)
+iris <- iris %>% group_by(Species) %>% sample_n(5) %>% ungroup()
+
+group_means <- iris %>%
+  group_by(Species) %>%
+  summarize(
+    mean = mean(Sepal.Width)
+  )
+
+ggplot(data = iris, mapping = aes(x = Sepal.Width, color = Species)) +
+  geom_density() +
+  geom_vline(data = group_means, mapping = aes(xintercept = mean, color = Species)) +
+  xlim(c(1, 5))
+```
+
+#### Some questions we might ask:
+
+ * Overall, is there a difference in mean sepal widths for the three species? (F test)
+    * $H_0: \mu_{1} = \mu_{2} = \mu_{3}$
+ * Is the mean for setosa flowers different from the mean for versicolor flowers? (t test)
+    * $H_0: \mu_{1} = \mu_{2}$, or $\mu_{1} - \mu_{2} = 0$
+ * Is the mean for the setosa flower, found in the arctic, different from the mean for non-arctic flowers? (t test)
+    * $H_0: \frac{1}{2}(\mu_{2} + \mu_{3}) = \mu_{1}$, or $\frac{1}{2}(\mu_{2} + \mu_{3}) - \mu_{1} = 0$
+
+\newpage
+
+## F Test Concepts
+
+#### Notation:
+
+* $i$: which group? ($i$ = 1, 2, or 3 for iris flowers since there are $I = 3$ species)
+* $j$: which observational unit within its group?  (if $i = 2$ and $j = 3$, we're talking about the 3rd versicolor flower)
+* $Y_{ij}$: response variable value for unit $j$ in group $i$
+* $\bar{Y}_i$: sample mean for group $i$
+
+#### Test set up
+
+Suppose we are conducting a test of $H_0: \mu_{1} = \mu_{2} = \mu_{3}$ vs. $H_A:$ at least one of the means differs from the others
+
+We frame this as a comparison of two models.
+
+#### 1. Full Model, separate means for all groups (corresponds to $H_A$)
+
+3 mean parameters: $\mu_1$, $\mu_2$, $\mu_3$
+
+```{r, fig.height = 1.5, echo = FALSE, fig.width = 5.8}
+# Calculate sample means and standard deviations separately for each species
+group_means <- iris %>%
+  group_by(Species) %>%
+  summarize(
+    mean = mean(Sepal.Width)
+  )
+
+ggplot(data = iris, mapping = aes(x = Sepal.Width, color = Species)) +
+  geom_density() +
+  geom_vline(data = group_means, mapping = aes(xintercept = mean, color = Species)) +
+  xlim(c(1, 5))
+```
+
+#### 2. Reduced Model, one mean common to all observations (corresponds to $H_0$)
+
+1 mean parameter: $\mu$
+
+```{r, fig.height = 1.5, fig.width = 4.8, echo = FALSE}
+# Calculate overall sample mean and standard deviation
+overall_mean <- iris %>%
+  summarize(
+    mean = mean(Sepal.Width),
+    sd = sd(Sepal.Width)
+  )
+
+ggplot(data = iris, mapping = aes(x = Sepal.Width)) +
+  geom_density() +
+  geom_vline(xintercept = overall_mean$mean) +
+  xlim(c(1, 5))
+```
+
+#### We can measure the usefulness of a model by the size of its residuals
+
+ * Imagine if we knew an iris flower was from the setosa species, and we wanted to guess its sepal width.
+    * We could guess the group mean for setosa flowers, $\bar{Y}_1$
+ * **Residual**: difference between observed value for response variable and fitted value for response variable.
+
+$$res_{ij} = Y_{ij} - \bar{Y}_i$$
+
+ * In general:
+
+$$\text{Better Model} \Leftrightarrow \text{Better Guesses} \Leftrightarrow \text{Smaller Residuals}$$
+
+ * The Full Model will have smaller residuals (on average) than the Reduced Model
+ * Question the F test answers: are the residuals from the full model smaller than the residuals from the reduced model by a statistically significant margin?
+
+\newpage
+
+#### Measuring the size of residuals from a model
+
+ * Residual Sum of Squares: Square the residuals and add them up
+$$\sum_i \sum_j (res_{ij})^2 = \sum_i \sum_j (Y_{ij} - \bar{Y}_i)^2$$
+ * Mean Squared Residual:
+$$\frac{\text{Residual Sum of Squares}}{\text{Degrees of Freedom}}$$
+
+#### Extra Sum of Squares
+
+$$\text{Extra Sum of Squares} = \text{Residual Sum of Squares, Reduced Model} - \text{Residual Sum of Squares, Full Model}$$
+
+ * Always positive because
+    * Reduced Model is more limited than Full Model
+    * Reduced Model has larger residuals than Full Model
+
+ * If Extra Sum of Squares is really big, the Full Model is much better than the Reduced Model
+
+ * Extra Sum of Squares has degrees of freedom equal to the difference in degrees of freedom for the full model and the reduced model.  In this case:
+
+$$df = (n - 1) - (n - I) = I - 1$$
+
+#### F Statistic
+
+ * "How big is the improvement in Residual Sum of Squares from using the Full Model instead of the Reduced Model"?
+    * Size of improvement is measured relative to the size of residuals in the full model
+
+\begin{align*}
+F &= \frac{(\text{Extra Sum of Squares})/(\text{Extra Degrees of Freedom})}{(\text{Residual Sum of Squares, Full Model})/(\text{Degrees of Freedom, Full Model})} \\
+ &= \frac{(\text{Extra Sum of Squares})/(I - 1)}{(\text{Residual Sum of Squares, Full Model})/(n - I)}
+\end{align*}
+
+ * If $H_{0}: \mu_1 = \mu_2 = \mu_3$ is **true**, then...
+    * Full Model **isn't better** than Reduced Model
+    * Residual Sum of Squares, Full Model is **similar to** Residual Sum of Squares, Reduced Model
+    * Extra Sum of Squares is **small**
+    * F Statistic is **small**
+
+ * If $H_O: \mu_1 = \mu_2 = \mu_3$ is **not true**, then...
+    * Full Model **is better** than Reduced Model
+    * Residual Sum of Squares, Full Model is **smaller than** Residual Sum of Squares, Reduced Model
+    * Extra Sum of Squares is **large**
+    * F Statistic is **large**
+
+ * **A large value of F statistic is evidence against** $H_0$
+
+ * We have to keep track of two degrees of freedom: $I - 1$, $n - I$.
+
+\newpage
+
+#### R Code
+
+```{r}
+iris_fit <- lm(Sepal.Width ~ Species, data = iris)
+anova(iris_fit)
+```
+
+#### What is the conclusion of the test?
+
+\vspace{3cm}
+
+#### Verifying the ANOVA table calculations
+
+The ANOVA table is intended to help organize calculations for the $F$ test.  Let's work through where all the numbers in the table come from.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{rccccc}
+\toprule
+Source & Sum of Squares & Degrees of Freedom & Mean Square & F \hphantom{blah} & p-value \\
+\midrule
+Extra & & & & &  \\
+\midrule
+Full Model & & & & & \\
+\midrule
+Reduced Model & & & & &  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+1. Calculate Residual Sum of Squares for the Full Model (Use the table on the next page.  I promise I'll never make you do this by hand again.)
+    a. Find the group mean for each of the three groups
+    b. Find the residual for each observation for the Full Model (observed value minus group mean)
+    c. Find the squared residual for each observation
+    d. Find the sum of squared residuals for the full model.
+    e. Enter the result in the "Full Model Sum of Squares" cell in the ANOVA table.
+2. Calculate Residual Sum of Squares for the Reduced Model (I will also never make you do this by hand again.)
+    a. Find the mean of all 15 observations
+    b. Find the residual for each observation for the Reduced Model
+    c. Find the squared residual for each observation
+    d. Find the sum of squared residuals for the reduced model.
+    e. Enter the result in the "Reduced Model Sum of Squares" cell in the ANOVA table.
+3. Calculate the Extra Sum of Squares and enter it in the ANOVA table
+4. Enter the degrees of freedom for the Full Model in the ANOVA table (n - I)
+5. Enter the degrees of freedom for the Reduced Model in the ANOVA table (n - 1)
+6. Enter the degrees of freedom for the Extra Sum of Squares in the ANOVA table (I - 1)
+7. Find the Mean Square for the Full Model (Sum of Squares divided by its degrees of freedom)
+8. Find the Mean Square for the Extra Sum of Squares (Sum of Squares divided by its degrees of freedom)
+9. Find the F statistic (Mean Square for Extra divided by Mean Square for Full Model)
+10. Find the p-value.  Your R code is `pf(5.6565, df1 = 2, df2 = 12, lower.tail = FALSE)`
+
+\newpage
+
+\begin{table}[!t]
+\centering
+\begin{tabular}{cccccccc}
+\toprule
+ & & \multicolumn{3}{c}{Full Model} & \multicolumn{3}{c}{Reduced Model} \\
+\cline{3-5} \cline{6-8} \\
+$Y_{ij}$ & Species & Group Mean & Residual & Squared Residual & Grand Mean & Residual & Squared Residual \\
+\midrule
+3.1 & setosa & & & & & & \\
+\midrule
+3.0 & setosa & & & & & & \\
+\midrule
+3.5 & setosa & & & & & & \\
+\midrule
+3.2 & setosa & & & & & & \\
+\midrule
+3.8 & setosa & & & & & & \\
+\midrule
+2.7 & versicolor & & & & & & \\
+\midrule
+2.4 & versicolor & & & & & & \\
+\midrule
+2.6 & versicolor & & & & & & \\
+\midrule
+2.9 & versicolor & & & & & & \\
+\midrule
+3.1 & versicolor & & & & & & \\
+\midrule
+3.2 & virginica & & & & & & \\
+\midrule
+2.5 & virginica & & & & & & \\
+\midrule
+2.8 & virginica & & & & & & \\
+\midrule
+2.6 & virginica & & & & & & \\
+\midrule
+3.0 & virginica & & & & & & \\
+\bottomrule
+Total & & & & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+

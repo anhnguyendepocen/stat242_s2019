@@ -1,0 +1,78 @@
+---
+title: "F tests for ANOVA, More Submodels"
+subtitle: "(Sleuth3 Sections 5.3 and 5.4)"
+output:
+  pdf_document:
+    fig_height: 2.8
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{multirow}
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+## Spock Trials Example
+
+```{r, message = FALSE, echo = FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(mosaic)
+library(gmodels)
+
+juries <- read_csv("http://www.evanlray.com/data/sleuth3/ex0502_women_jurors.csv")
+head(juries)
+
+ggplot(data = juries, mapping = aes(x = Judge, y = Percent)) +
+  geom_boxplot()
+```
+
+#### All means equal?
+
+$H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 = \mu_6 = \mu_7$
+
+$H_A:$ At least one mean is not equal to the others.
+
+```{r}
+spock_fit_full <- lm(Percent ~ Judge, data = juries)
+anova(spock_fit_full)
+```
+
+Note: Reduced model has only one mean for all 7 ($H_0$ is true).
+
+What is the conclusion?
+
+\vspace{3cm}
+
+#### Means for other 6 judges equal?
+
+
+$H_0: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 = \mu_6$
+
+$H_A:$ At least one mean for a judge other than Spock is not equal to the others.
+
+Note: these hypotheses involve judges A through F; Spock's judge is not involved in these hypothesis statements.\
+
+```{r}
+juries <- juries %>%
+  mutate(
+    judge_spocks = ifelse(Judge %in% c("A", "B", "C", "D", "E", "F"), "Not Spock's", "Spock's")
+  )
+head(juries, 20)
+
+spock_fit_reduced <- lm(Percent ~ judge_spocks, data = juries)
+anova(spock_fit_reduced, spock_fit_full)
+```
+
+What is the conclusion?
