@@ -13,8 +13,11 @@ Review materials and solutions to quizzes and exams will be posted here.
 |      | important, but that didn't make it onto quizzes. Please  |                                                          |
 |      | also read the book and review in-class materials.        |                                                          |
 +------+----------------------------------------------------------+----------------------------------------------------------+
-| Quiz | Chapter 2: [pdf](exams/ch2/stat242_quizzes.pdf)          |Solutions: [pdf](exams/Ch52_62/stat242_quiz_solutions.pdf)|
+| Quiz | Chapter 2: [pdf](exams/ch2/stat242_quizzes.pdf)          |Solutions: [pdf](exams/ch2/stat242_quiz_solutions.pdf)    |
 +------+----------------------------------------------------------+----------------------------------------------------------+
 | Quiz | Sections 2.3, 5.2, and 6.2:                              |Solutions: [pdf](exams/Ch52_62/stat242_quiz_solutions.pdf)|
 |      | [pdf](exams/Ch52_62/stat242_quizzes.pdf)                 |                                                          |
++------+----------------------------------------------------------+----------------------------------------------------------+
+| Quiz | Sections 5.3 and 5.4:                                    |Solutions: [pdf](exams/ch53_54/stat242_quiz_solutions.pdf)|
+|      | [pdf](exams/ch53_54/stat242_quizzes.pdf)                 |                                                          |
 +------+----------------------------------------------------------+----------------------------------------------------------+
