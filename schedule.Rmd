@@ -167,9 +167,11 @@ make_week_box("week5", TRUE, "Week 5: Feb 18 -- 22",
 #### Wed, Feb 20
  * **In class**, we will do the following:
     * **Quiz**
-    * Discuss material from Section 5.5 and Chapter 3
+    * Discuss material from Section 5.5 and Chapter 3: Conditions for ANOVA [pdf](materials/20190220_conditions/anova_conditions.pdf)
+    * **Homework 4** due Friday, Feb 22
 
 #### Fri, Feb 22
+ * **Homework 4** due today!!
  * **In class**, we will do the following:
     * **Quiz**
     * Discuss material from Section 5.5 and Chapter 3
@@ -178,17 +180,23 @@ make_week_box("week5", TRUE, "Week 5: Feb 18 -- 22",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week6", FALSE, "Week 6: Feb 25 -- Mar 1",
+make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
 "
 
 #### Mon, Feb 25
  * **In class**, we will do the following:
+    * **Quiz**
+    * Finish material from Section 5.5 and Chapter 3, or move on to Sections 6.3 and parts of 6.4
 
 #### Wed, Feb 27
  * **In class**, we will do the following:
+    * **Quiz**
+    * Section 6.3 and parts of 6.4
 
 #### Fri, Mar 1
  * **In class**, we will do the following:
+    * **Quiz**
+    * Section 6.3 and parts of 6.4, or else move on to Chapter 7
 "
   )
 ```
@@ -199,12 +207,15 @@ make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
 
 #### Mon, Mar 4
  * **In class**, we will do the following:
+    * Midterm?
 
 #### Wed, Mar 6
  * **In class**, we will do the following:
+    * Midterm?
 
 #### Fri, Mar 8
  * **In class**, we will do the following:
+    * Chapter 7
 "
   )
 ```
