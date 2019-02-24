@@ -174,7 +174,7 @@ make_week_box("week5", TRUE, "Week 5: Feb 18 -- 22",
  * **Homework 4** due today!!
  * **In class**, we will do the following:
     * Discuss material from Section 5.5 and Chapter 3
-    * Lab 5
+    * Lab 5.  Solutions: [pdf](https://github.com/mhc-stat242-s2019/Lab5_solutions/blob/master/lab05_anova_transformations.pdf)
 "
   )
 ```
