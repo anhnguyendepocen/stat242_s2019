@@ -186,17 +186,23 @@ make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
 #### Mon, Feb 25
  * **In class**, we will do the following:
     * **Quiz**
-    * Finish material from Section 5.5 and Chapter 3, or move on to Sections 6.3 and parts of 6.4
+    * Section 6.3 and parts of 6.4.  [pdf](materials/20190225_multiple_comparisons/multiple_comparisons.pdf)
+ * **After class** please work on the following:
+    * **Homework 5** due Friday Mar 1
 
 #### Wed, Feb 27
  * **In class**, we will do the following:
     * **Quiz**
     * Section 6.3 and parts of 6.4
+ * **After class** please work on the following:
+    * **Homework 5** due Friday Mar 1
 
 #### Fri, Mar 1
  * **In class**, we will do the following:
     * **Quiz**
-    * Section 6.3 and parts of 6.4, or else move on to Chapter 7
+    * Chapter 7
+ * **After class** please work on the following:
+    * **Homework 5** due Friday Mar 1
 "
   )
 ```
@@ -207,7 +213,8 @@ make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
 
 #### Mon, Mar 4
  * **In class**, we will do the following:
-    * Midterm?
+    * **Quiz**
+    * Chapter 7
 
 #### Wed, Mar 6
  * **In class**, we will do the following:
