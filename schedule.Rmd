@@ -152,7 +152,7 @@ make_week_box("week4", FALSE, "Week 4: Feb 11 -- 15",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week5", TRUE, "Week 5: Feb 18 -- 22",
+make_week_box("week5", FALSE, "Week 5: Feb 18 -- 22",
 "
 
 #### Mon, Feb 18
@@ -187,13 +187,16 @@ make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
  * **In class**, we will do the following:
     * **Quiz**
     * Section 6.3 and parts of 6.4.  [pdf](materials/20190225_multiple_comparisons/multiple_comparisons.pdf)
+    * Lab 6 on GitHub.  Solutions: [pdf](https://github.com/mhc-stat242-s2019/Lab6_solutions/blob/master/lab06_multiple_comparisons.pdf)
  * **After class** please work on the following:
     * **Homework 5** due Friday Mar 1
 
 #### Wed, Feb 27
  * **In class**, we will do the following:
     * **Quiz**
-    * Section 6.3 and parts of 6.4
+    * Review solutions for Lab 6
+    * Start on \"Simple\" Linear Regression: [pdf](materials/20190227_SLR/20190227_slr.pdf)
+    * If time, Lab 7: [https://github.com/mhc-stat242-s2019/Lab7.git](https://github.com/mhc-stat242-s2019/Lab7.git)
  * **After class** please work on the following:
     * **Homework 5** due Friday Mar 1
 
@@ -208,7 +211,7 @@ make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
+make_week_box("week7", TRUE, "Week 7: Mar 4 -- 8",
 "
 
 #### Mon, Mar 4
@@ -218,7 +221,7 @@ make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
 
 #### Wed, Mar 6
  * **In class**, we will do the following:
-    * Midterm?
+    * Midterm
 
 #### Fri, Mar 8
  * **In class**, we will do the following:

@@ -1,0 +1,162 @@
+---
+title: "\"Simple\" Linear Regression (Sleuth 3 Chapter 7)"
+output: pdf_document
+header-includes:
+   - \usepackage{soul}
+geometry: margin=0.6in
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+```
+
+## Big points for today
+
+ * Simple linear regression is exactly like the ANOVA model, but the group means are on a line.
+ * First R commands
+ * Interpretation of slope and intercept
+ * Hypothesis tests and confidence intervals about slope and intercept
+
+## Example
+
+We have a data set with information about 152 flights by Endeavour Airlines that departed from JFK airport in New York to either Nashville (BNA), Cincinnati (CVG), or Minneapolis-Saint Paul (MSP) in January 2012.
+
+```{r, echo=FALSE, message = FALSE}
+flights <- read_csv("flights_data.csv")
+```
+
+```{r}
+head(flights)
+```
+
+## So Far: ANOVA Model
+
+ * Observations in group $i$ follow a Normal($\mu_i$, $\sigma^2$) distribution
+ * Observations are independent of each other
+
+```{r, fig.height = 1.5}
+ggplot(data = flights, mapping = aes(x = air_time, color = dest)) +
+  geom_density() +
+  theme_bw()
+```
+
+**Note:** The picture would look exactly the same if we treated distance as a categorical variable:
+
+```{r, fig.height = 1.5}
+ggplot(data = flights, mapping = aes(x = air_time, color = factor(distance))) +
+  geom_density() +
+  theme_bw()
+```
+
+\newpage
+
+**Old idea:** Each group has a normal distribution with its own mean
+
+**New idea:** Each group has a normal distribution with a mean that is a linear function of distance
+
+```{r, echo = FALSE, message=FALSE, fig.height = 3}
+library(ggridges)
+
+lm_fit <- lm(air_time ~ distance, data = flights)
+
+ggplot(data = flights, mapping = aes(x = air_time, y = distance)) +
+  geom_abline(intercept = -(coef(lm_fit)[1])/(coef(lm_fit)[2]), slope = 1/coef(lm_fit)[2]) +
+  geom_density_ridges(mapping = aes(fill = factor(distance)), alpha = 0.4, jittered_points = TRUE, position = "points_jitter") +
+  scale_fill_discrete("distance") +
+  coord_flip() +
+  theme_ridges(center = TRUE)
+```
+
+The simple linear regression is exactly like the ANOVA model, with the one new restriction that the means fall along a line.
+
+**Conditions:** spells "LINE-O"
+
+ * **Linear** relationship between explanatory and response variables: $\mu(Y|X) = \beta_0 + \beta_1 X$
+    * Read as "The mean of Y for a given value of X"
+    * $\beta_0$ is intercept: mean response when $X = 0$
+    * $\beta_1$ is slope: change in mean response when $X$ increases by 1 unit.
+    * $\beta_0$ and $\beta_1$ are **parameters** describing the relationship between X and Y **in the population**
+ * **Independent** observations (knowing that one observation is above its mean wouldn't give you any information about whether or not another observation is above its mean)
+ * **Normal** distribution
+ * **Equal standard deviation** of response for all values of X
+    * Denote this standard deviation by $\sigma$
+ * **no Outliers** (not a formal part of the model, but important to check in practice)
+
+#### R Code
+
+```{r}
+model_fit <- lm(air_time ~ distance, data = flights)
+summary(model_fit)
+```
+
+\newpage
+
+#### 1. What is the estimated intercept and its interpretation?
+
+\vspace{3cm}
+
+#### 2. Conduct a hypothesis test of the claim that when a flight travels 0 miles, its air time is 0 minutes.
+
+\vspace{4cm}
+
+#### 3. What is the estimated slope and its interpretation?
+
+\vspace{3cm}
+
+#### 4. Conduct a hypothesis test of the claim that a flight's air time is unrelated to the distance travelled.
+
+\vspace{4cm}
+
+\newpage
+
+#### 5. Conduct a hypothesis test of the claim that these planes are flying at an average speed that's the same as the typical cruising speed of commercial passenger aircraft.
+
+According to Wikipedia, the typical cruising speed of commercial passenger aircraft is about 560 miles per hour (https://en.wikipedia.org/wiki/Cruise_(aeronautics)).  After some unit changes, this works out to about 0.107 minutes per mile.
+
+```{r}
+# calculate t statistic
+(0.147 - 0.107) / 0.0044
+
+# calculate 2-sided p-value
+pt(-9.09, df = 152 - 2) + pt(9.09, df = 152 - 2, lower.tail = FALSE)
+```
+
+\vspace{4cm}
+
+#### 6. Find and interpret a 95% confidence interval for the slope of the line
+
+```{r}
+# automatic calculations
+confint(model_fit)
+
+# manual calculations from the formula: get the multiplier for an individual 95% CI
+qt(0.975, df = 152 - 2)
+
+# calculate lower and upper endpoints of confidence interval
+0.147 - 1.976 * 0.00437
+0.147 + 1.976 * 0.00437
+```
+
+\newpage
+
+#### R Code to make scatterplot with estimated line overlaid
+
+```{r, fig.height = 3}
+ggplot(data = flights, mapping = aes(x = distance, y = air_time)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+```{r, fig.height = 3}
+ggplot(data = flights, mapping = aes(x = distance, y = air_time)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw()
+```
+
+
