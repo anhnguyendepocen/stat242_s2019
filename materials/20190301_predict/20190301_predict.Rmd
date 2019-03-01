@@ -1,0 +1,207 @@
+---
+title: "Predictions for \"Simple\" Linear Regression"
+subtitle: "(Sleuth 3 Sections 7.4.2 and 7.4.3)"
+output: pdf_document
+header-includes:
+   - \usepackage{soul}
+geometry: margin=0.6in
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+```
+
+## Goals for today
+
+ * Get an estimate for the mean response at a particular value $x$ of the explanatory variable by plugging in $x$ in the equation
+ * Get a *confidence interval* for the mean response at a particular value $x$ using $t$-based methods
+ * Make Bonferroni or Scheffe adjustments to get simultaneous confidence intervals for the mean response at multiple values of $x$.
+
+## Example
+
+We have a data set with information about 152 flights by Endeavour Airlines that departed from JFK airport in New York to either Nashville (BNA), Cincinnati (CVG), or Minneapolis-Saint Paul (MSP) in January 2012.
+
+```{r, echo=FALSE, message = FALSE}
+flights <- read_csv("flights_data.csv")
+```
+
+```{r}
+head(flights)
+nrow(flights)
+```
+
+#### R Code to get model fit
+
+```{r}
+model_fit <- lm(air_time ~ distance, data = flights)
+summary(model_fit)
+```
+
+\newpage
+
+#### Our Estimates for $\beta_0$ and $\beta_1$ are
+
+\vspace{0.5cm}
+
+$\hat{\beta}_0 =$
+
+\vspace{0.5cm}
+
+$\hat{\beta}_1 =$
+
+\vspace{0.5cm}
+
+Note: LaTeX code for $\hat{\beta}_1$ is `\hat{\beta}_1`.
+
+#### Our estimated mean function is
+
+\vspace{0.5cm}
+
+$\hat{\mu}(Y|X) = \hat{\beta}_0 + \hat{\beta}_1 X$ = 
+
+\vspace{0.5cm}
+
+#### The fitted (predicted) mean air time at a flight distance of 589 miles is
+
+\vspace{3cm}
+
+```{r}
+14.568 + 0.147 * 589
+```
+
+...or...
+
+```{r}
+predict_df <- data.frame(
+  distance = 589
+)
+predict_df
+
+predict(model_fit, newdata = predict_df)
+```
+
+\newpage
+
+## Standard Error of Estimated Mean
+
+Here's a formula you will never use for the predicted mean at the value $X_0$:
+
+$$SE\{\hat{\mu}(Y|X_0)\} = \hat{\sigma}\sqrt{\frac{1}{n} + \frac{(X_0 - \bar{X})^2}{(n - 1)s_X^2}}$$
+
+ * $\bar{X}$ is the sample mean of the explanatory variable
+ * $s^2_X$ is the sample variance of the explanatory variable
+ * $\hat{\sigma} = \sqrt{\frac{\text{Sum of Squared Residuals}}{n-2}}$
+
+Something to notice (don't need to memorize):
+
+ * This standard error depends on the value $X_0$ at which we are estimating the mean response
+ * $(X_0 - \bar{X})^2$ is smallest if $X_0 = \bar{X}$, so $SE\{\hat{\mu}(Y|X_0)\}$ is smallest at the sample mean.
+
+#### Find and interpret a 95% confidence interval for the mean air time for flights traveling a distance of 589 miles.
+
+```{r}
+predict(model_fit, newdata = predict_df, interval = "confidence", se.fit = TRUE)
+```
+
+\vspace{5cm}
+
+This is just a $t$-based interval based on the estimate and its standard error (although the calculation of standard error is complicated...)
+
+```{r}
+qt(0.975, df = 152 - 2)
+
+101.150 - 1.976 * 1.526
+101.150 + 1.976 * 1.526
+```
+
+\newpage
+
+#### Find and interpret Bonferroni adjusted confidence intervals for the mean air time at flight distances of 589 miles, 765 miles, and 1029 miles, with a familywise confidence level of 95%.
+
+Approach 1 (easier): adjust confidence level we ask `predict` for.
+
+ * 3 CI's at a familywise confidence level of 95%
+ * Overall, miss for 5% of samples, $\alpha = 0.05$
+ * Each individual CI has $\alpha = 0.05/3 = 0.0167$
+ * Each individual CI has confidence level $(1 - 0.0167) \times 100\% = 98.3\%$
+
+```{r}
+predict_df <- data.frame(
+  distance = c(589, 765, 1029)
+)
+predict_df
+
+predict(model_fit,
+  newdata = predict_df,
+  interval = "confidence",
+  se.fit = TRUE,
+  level = 0.983
+)
+```
+
+\newpage
+
+Approach 2: Manual calculation based on standard errors
+
+```{r}
+(1 - 0.05/(2*3))
+qt(0.9917, df = 152 - 2)
+```
+
+```{r}
+# CI for X0 = 589
+101.150 - 2.423 * 1.526
+101.150 + 2.423 * 1.526
+
+# CI for X0 = 765
+127.0223 - 2.423 * 0.960
+127.0223 + 2.423 * 0.960
+
+# CI for X0 = 1029
+165.8301 - 2.423 * 1.016
+165.8301 + 2.423 * 1.016
+```
+
+#### Find and plot Scheffe adjusted CIs for the means at a grid of 101 values of x between 589 and 1029
+
+```{r, fig.height = 3}
+ggplot(data = flights, mapping = aes(x = distance, y = air_time)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw()
+```
+
+\newpage
+
+#### I will not ask you to do this by hand, the following is just to illustrate
+
+```{r, fig.height=3}
+Scheffe_multiplier <- sqrt((2 - 1) * qf(0.95, df1 = 2 - 1, df2 = 152 - 2))
+
+predict_df <- data.frame(
+  distance = seq(from = 589, to = 1029, length = 101)
+)
+head(predict_df)
+
+preds_with_ses <- predict(model_fit,
+  newdata = predict_df,
+  se.fit = TRUE
+)
+
+predict_df <- predict_df %>%
+  mutate(
+    scheffe_lower = preds_with_ses$fit - Scheffe_multiplier * preds_with_ses$se.fit,
+    scheffe_upper = preds_with_ses$fit + Scheffe_multiplier * preds_with_ses$se.fit
+  )
+
+ggplot(data = flights, mapping = aes(x = distance, y = air_time)) +
+  geom_point() +
+  geom_line(data = predict_df, mapping = aes(x = distance, y = scheffe_lower)) +
+  geom_line(data = predict_df, mapping = aes(x = distance, y = scheffe_upper)) +
+  theme_bw()
+```
+
