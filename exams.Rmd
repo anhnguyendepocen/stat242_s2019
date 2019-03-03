@@ -24,3 +24,6 @@ Review materials and solutions to quizzes and exams will be posted here.
 | Quiz | Sections 5.5 and Chapter 3:                              |Solutions: [pdf](exams/ch55_3/stat242_quiz_solutions.pdf) |
 |      | [pdf](exams/ch55_3/stat242_quizzes.pdf)                  |                                                          |
 +------+----------------------------------------------------------+----------------------------------------------------------+
+| Quiz | Sections 6.3 and 6.4:                                    |Solutions: [pdf](exams/ch63_64/stat242_quiz_solutions.pdf)|
+|      | [pdf](exams/ch63_64/stat242_quizzes.pdf)                 |                                                          |
++------+----------------------------------------------------------+----------------------------------------------------------+
