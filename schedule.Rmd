@@ -182,7 +182,7 @@ make_week_box("week5", FALSE, "Week 5: Feb 18 -- 22",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
+make_week_box("week6", FALSE, "Week 6: Feb 25 -- Mar 1",
 "
 
 #### Mon, Feb 25
@@ -206,6 +206,9 @@ make_week_box("week6", TRUE, "Week 6: Feb 25 -- Mar 1",
  * **In class**, we will do the following:
     * **Quiz**
     * Chapter 7
+        * Finish handout from last class
+        * Point estimates and confidence intervals for the mean response at a given value of the explanatory variable: [pdf](materials/20190301_predict.pdf)
+        * Start Lab 7
  * **After class** please work on the following:
     * **Homework 5** due Friday Mar 1
 "
@@ -219,15 +222,14 @@ make_week_box("week7", TRUE, "Week 7: Mar 4 -- 8",
 #### Mon, Mar 4
  * **In class**, we will do the following:
     * **Quiz**
-    * Chapter 7
+    * Finish Lab 7.  Solutions posted here: https://github.com/mhc-stat242-s2019/Lab7_Solutions
 
 #### Wed, Mar 6
  * **In class**, we will do the following:
     * Midterm
 
 #### Fri, Mar 8
- * **In class**, we will do the following:
-    * Chapter 7
+ * **Class cancelled**
 "
   )
 ```
@@ -241,17 +243,24 @@ make_week_box("week8", FALSE, "Week 8: Mar 11 -- 15",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week9", FALSE, "Week 9: Mar 18 -- 22",
+make_week_box("week9", TRUE, "Week 9: Mar 18 -- 22",
 "
 
 #### Mon, Mar 18
- * **In class**, we will do the following:
+ * **In class**, we will do the following: Start thinking about residuals.  Chapters 7 and 8
+    * **No Quiz**
+    * Residuals, model fit by least squares, prediction intervals
+    * Model Checking by residuals plots
 
 #### Wed, Mar 20
- * **In class**, we will do the following:
+ * **In class**, we will do the following: Chapter 8
+    * **Quiz**
+    * Model checking by residuals plots, start on transformations for simple linear regression
 
 #### Fri, Mar 22
- * **In class**, we will do the following:
+ * **In class**, we will do the following: Chapter 8
+    * **Quiz**
+    * Transformations for simple linear regression
 "
   )
 ```
@@ -262,12 +271,15 @@ make_week_box("week10", FALSE, "Week 10: Mar 25 -- 29",
 
 #### Mon, Mar 15
  * **In class**, we will do the following:
+    * **Quiz**
 
 #### Wed, Mar 27
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Fri, Mar 29
  * **In Class**, we will do the following:
+    * **Quiz**
 "
   )
 ```
@@ -278,12 +290,15 @@ make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
 
 #### Mon, Apr 1
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Tue, Apr 3
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Fri, Apr 5
  * **In Class**, we will do the following:
+    * **Quiz**
 "
   )
 ```
@@ -294,12 +309,15 @@ make_week_box("week12", FALSE, "Week 12: Apr 8 -- 12",
 
 #### Mon, Apr 8
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Wed, Apr 10
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Fri, Apr 12
  * **In Class**, we will do the following:
+    * **Quiz**
 "
   )
 ```
@@ -310,12 +328,15 @@ make_week_box("week13", FALSE, "Week 13: Apr 15 -- 19",
 
 #### Mon, Apr 15
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Wed, Apr 17
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Fri, Apr 19
  * **In Class**, we will do the following:
+    * **Quiz**
 "
   )
 ```
@@ -326,12 +347,15 @@ make_week_box("week14", FALSE, "Week 14: Apr 22 -- 26",
 
 #### Mon, Apr 22
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Wed, Apr 24
  * **In Class**, we will do the following:
+    * **Quiz**
 
 #### Fri, Apr 26
  * **In Class**, we will do the following:
+    * **Quiz**
 "
   )
 ```
@@ -342,6 +366,7 @@ make_week_box("week15", FALSE, "Week 15: Apr 29 -- 30",
 
 #### Mon, Apr 29
  * **In Class**, we will do the following:
+    * **Quiz**
 "
   )
 ```
