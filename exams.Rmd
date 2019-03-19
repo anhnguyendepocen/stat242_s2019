@@ -27,3 +27,6 @@ Review materials and solutions to quizzes and exams will be posted here.
 | Quiz | Sections 6.3 and 6.4:                                    |Solutions: [pdf](exams/ch63_64/stat242_quiz_solutions.pdf)|
 |      | [pdf](exams/ch63_64/stat242_quizzes.pdf)                 |                                                          |
 +------+----------------------------------------------------------+----------------------------------------------------------+
+| Quiz | Chapter 7:                                               |Solutions: [pdf](exams/ch7/stat242_quiz_solutions.pdf)    |
+|      | [pdf](exams/ch7/stat242_quizzes.pdf)                     |                                                          |
++------+----------------------------------------------------------+----------------------------------------------------------+
