@@ -1,0 +1,66 @@
+---
+title: "Anscombe's Data"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{soul}
+   - \usepackage{booktabs}
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+library(gridExtra)
+
+anscombe <- read_csv("http://www.evanlray.com/data/base_r/anscombe_quintet.csv")
+```
+
+### All 5 Have Essentially the Same Estimated Intercept, Slope, $R^2$, and Residual Standard Deviation!
+
+```{r, echo = FALSE}
+fit1 <- lm(y1 ~ x1, data = anscombe)
+fit2 <- lm(y2 ~ x2, data = anscombe)
+fit3 <- lm(y3 ~ x3, data = anscombe)
+fit4 <- lm(y4 ~ x4, data = anscombe)
+fit5 <- lm(y5 ~ x5, data = anscombe)
+
+anscombe_long <- data.frame(
+  x = c(anscombe$x1, anscombe$x2, anscombe$x3, anscombe$x4, anscombe$x5),
+  y = c(anscombe$y1, anscombe$y2, anscombe$y3, anscombe$y4, anscombe$y5),
+  residual = c(residuals(fit1), residuals(fit2), residuals(fit3), residuals(fit4), residuals(fit5)),
+  data_set = rep(paste("Data Set", 1:5), each = nrow(anscombe))
+)
+
+grid.arrange(
+  ggplot(data = anscombe_long, mapping = aes(x = x, y = y)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    facet_wrap(~factor(data_set), nrow = 1),
+  ggplot(data = anscombe_long, mapping = aes(x = x, y = residual)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    facet_wrap(~factor(data_set), nrow = 1) +
+    ylab("residual\n")
+)
+```
+
+* Brief reminder of **conditions for linear regression**:
+    * **Linear** relationship
+    * **Independent** observations
+    * **Normally** distributed residuals (or large enough sample size)
+    * **Equal variability** of residuals
+    * No **outliers**
+
+* How do they check out?
+    * Data Set 1 looks OK!
+    * Data Set 2 not a linear relationship!
+    * Data Sets 3 and 4 have outliers (or influential observations)!
+    * Data Set 5 has a lack of equal variance!
+
+* **Conclusion: It's critical to look at plots!!!!!**

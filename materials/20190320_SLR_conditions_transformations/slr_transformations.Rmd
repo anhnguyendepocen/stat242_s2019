@@ -1,0 +1,431 @@
+---
+title: "Simple Linear Regression: Conditions and Transformations"
+subtitle: "Sleuth3 Chapter 8"
+output:
+  pdf_document:
+    fig_height: 2.8
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{vwcol}
+geometry: margin=0.5in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(gridExtra)
+```
+
+## Simple Linear Regression Model and Conditions
+
+ * Observations follow a normal distribution with mean that is a linear function of the explanatory variable
+ * $Y_i \sim \text{Normal}(\beta_0 + \beta_1 X_i, \sigma)$
+
+**Conditions:** spells "LINE-O"
+
+ * **Linear** relationship between explanatory and response variables: $\mu(Y|X) = \beta_0 + \beta_1 X$
+    * Read as "The mean of Y for a given value of X"
+    * $\beta_0$ is intercept: mean response when $X = 0$
+    * $\beta_1$ is slope: change in mean response when $X$ increases by 1 unit.
+    * $\beta_0$ and $\beta_1$ are **parameters** describing the relationship between X and Y **in the population**
+ * **Independent** observations (knowing that one observation is above its mean wouldn't give you any information about whether or not another observation is above its mean)
+ * **Normal** distribution of responses around the line
+ * **Equal standard deviation** of response for all values of X
+    * Denote this standard deviation by $\sigma$
+ * **no Outliers** (not a formal part of the model, but important to check in practice)
+
+## Transformations
+
+ * Transformations can sometimes help with the following issues:
+    * skewed distributions (but skewness is only a problem if it is very serious)
+    * lack of equal standard deviation for all values of X
+    * outliers (but usually only if this is a side effect of serious skewness)
+    * lack of a linear relationship
+
+## Reminder of the Ladder of Powers
+
+ * We start at $y$ and go up or down the ladder.
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{c c p{8cm}}
+\toprule
+Transformation & R Code & Comments \\
+\toprule
+\vdots & \\
+\midrule
+$e^y$ & \verb&exp(y)& & Exactly where on the ladder the exponential transformation belongs depends on the magnitude of the data, but somewhere around here... \\
+\midrule
+$y^2$ & \verb&y^2& & \\
+\midrule
+$y$ &  & Start here (no transformation) \\
+\midrule
+$\sqrt{y}$ & \verb&sqrt(y)& & \\
+\midrule
+$y^{``0"}$ & \verb&log(y)& & We use $\log(y)$ here \\
+\midrule
+$-1/\sqrt{y}$ & \verb&-1/sqrt(y)& & The $-$ keeps the values of $y$ in order \\
+\midrule
+$-1/y$ & \verb&-1/y& & \\
+\midrule
+$-1/y^2$ & \verb&-1/y^2& & \\
+\midrule
+\vdots & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+ * Which direction?
+    * If a variable is skewed right, move it down the ladder (pull down large values)
+    * If a variable is skewed left, move it up the ladder (pull up small values)
+
+```{r, echo = FALSE}
+example <- data.frame(
+  y = c(1, 2, 3, 4),
+  y_squared = c(1, 2, 3, 4)^2,
+  sqrt_y = c(1, 2, 3, 4)^0.5
+)
+```
+
+```{r, fig.height = 3, echo = FALSE}
+p1 <- ggplot(data = example, mapping = aes(x = y_squared, y = 0)) +
+  geom_point() +
+  ggtitle("Moved Up 1 Step: spread out points on the right side") +
+  ylab("") +
+  theme(axis.text.y=element_blank(), axis.ticks.y = element_blank())
+
+p2 <- ggplot(data = example, mapping = aes(x = y, y = 0)) +
+  geom_point() +
+  ggtitle("Starting Point: evenly spaced") +
+  ylab("") +
+  theme(axis.text.y=element_blank(), axis.ticks.y = element_blank())
+
+p3 <- ggplot(data = example, mapping = aes(x = sqrt_y, y = 0)) +
+  geom_point() +
+  ggtitle("Moved Down 1 Step: spread out points on the left side") +
+  ylab("") +
+  theme(axis.text.y=element_blank(), axis.ticks.y = element_blank())
+
+grid.arrange(p1, p2, p3)
+```
+
+\begin{vwcol}[widths={0.65,0.25, 0.1},
+ sep=0cm, justify=left,rule=0pt,indent=1em] 
+\includegraphics[width=5in]{sleuth3_display_86.png}
+
+\includegraphics[width=2.5in]{tukey.png}
+\end{vwcol} 
+
+\newpage
+
+## Example: Case Study 8.1.1 in Sleuth3
+
+Quote from the book:
+
+> Biologists have noticed a consistent relation between the area of islands and the number of animal and plant species living on them. ... The data [below] are the numbers of reptile and amphibian species and the island areas for seven islands in the west Indies. (Data on species from E. O. Wilson, *The Diversity of Life*, New York: W. W. Norton, 1991; areas from *The 1994 World Almanac, Mahwah, N.J.: Funk & Wagnalls, 1993.).
+
+```{r, echo=FALSE, message=FALSE}
+island_species <- read_csv("http://www.evanlray.com/data/sleuth3/case0801_island_species.csv")
+```
+
+```{r}
+head(island_species, 3)
+```
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = Area, y = Species)) +
+  geom_point() +
+  theme_bw()
+```
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = Area)) +
+  geom_histogram(bins = 10) +
+  theme_bw()
+```
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = Species)) +
+  geom_histogram(bins = 10) +
+  theme_bw()
+```
+
+The relationship is non-linear.  Let's try a transformation.  Pulling in the extreme values for `Area` could help with the non-linearity.  Let's move down the ladder for that variable.
+
+\newpage
+
+### Square root of area vs Species
+
+```{r}
+island_species <- island_species %>%
+  mutate(
+    sqrt_area = sqrt(Area)
+  )
+```
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = sqrt_area, y = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+Looks better... let's check residuals plots.
+
+```{r}
+lm_fit <- lm(Species ~ sqrt_area, data = island_species)
+island_species <- island_species %>%
+  mutate(
+    residual_sqrt = residuals(lm_fit)
+  )
+
+ggplot(data = island_species, mapping = aes(x = sqrt_area, y = residual_sqrt)) +
+  geom_point() +
+  theme_bw()
+```
+
+What do we see?
+
+\newpage
+
+### Log of area vs. Species
+
+```{r}
+island_species <- island_species %>%
+  mutate(
+    log_area = log(Area)
+  )
+```
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = log_area, y = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+Too far?
+
+Let's go back to square root of `Area`, and try taking a log of `Species` to address the non-constant variance.
+
+### Square root of Area vs. square root of Species
+
+```{r}
+island_species <- island_species %>%
+  mutate(
+    sqrt_species = sqrt(Species)
+  )
+```
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = sqrt_area, y = sqrt_species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+Variability around the trend looks better now, but the curvature is worse.  Should we try adjusting area down again, now that we're looking at the square root of species as our response?
+
+\newpage
+
+### Log of area vs. square root of species
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = log_area, y = sqrt_species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+This does seem like it's gone too far in terms of transforming area.  On the other hand, moving a step down on the ladder for species might help with this non-linearity.
+
+#### Log of area vs. log of species
+
+
+```{r}
+island_species <- island_species %>%
+  mutate(
+    log_species = log(Species)
+  )
+```
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = log_area, y = log_species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+Looks pretty good, but let's check a residuals plot again.
+
+```{r}
+lm_fit <- lm(log_species ~ log_area, data = island_species)
+island_species <- island_species %>%
+  mutate(
+    residual_log = residuals(lm_fit)
+  )
+
+ggplot(data = island_species, mapping = aes(x = log_area, y = residual_log)) +
+  geom_point() +
+  theme_bw()
+```
+
+Our book says this is ok, and it might be, but I have doubts...
+
+```{r}
+island_species <- island_species %>%
+  mutate(
+    area_grouped = ifelse(log_area < 6, "Small Area", "Large Area")
+  )
+
+island_species %>% select(Area, log_area, area_grouped)
+
+island_species %>%
+  group_by(area_grouped) %>%
+  summarize(sd_residual_log = sd(residual_log))
+```
+
+What if we go down another step for each?
+
+\newpage
+
+### -1/Square root transformation for both
+
+```{r}
+island_species <- island_species %>%
+  mutate(
+    neg_inv_sqrt_area = -1/sqrt(Area),
+    neg_inv_sqrt_species = -1/sqrt(Species)
+  )
+```
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = neg_inv_sqrt_area, y = neg_inv_sqrt_species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+Definitely worse.  Area is skewed left now, and we've put ourselves in the lower right corner of Tukey's circle.  Back up a step for area?
+
+#### log area vs. -1/Square root of species
+
+```{r, fig.height=1.75}
+ggplot(data = island_species, mapping = aes(x = log_area, y = neg_inv_sqrt_species)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+```
+
+OK?  Let's check a residuals plot.
+
+```{r}
+lm_fit <- lm(neg_inv_sqrt_species ~ log_area, data = island_species)
+island_species <- island_species %>%
+  mutate(
+    residual_log_inv_sqrt = residuals(lm_fit)
+  )
+
+ggplot(data = island_species, mapping = aes(x = log_area, y = residual_log_inv_sqrt)) +
+  geom_point() +
+  theme_bw()
+```
+
+Variances look about equal!  Perhaps slight indications of non-linearity, but it's pretty good!
+
+Double check standard deviations:
+
+```{r}
+island_species %>%
+  group_by(area_grouped) %>%
+  summarize(residual_log_inv_sqrt = sd(residual_log_inv_sqrt))
+```
+
+OK, now the small area group has a standard deviation that's twice the large area group.  But that's better than 4, and our sample sizes are small (so small differences in standard deviations could be due to random noise).  I might be willing to go with this.
+
+Residuals approximately normal?
+
+```{r}
+ggplot(data = island_species, mapping = aes(x = residual_log_inv_sqrt)) +
+  geom_histogram()
+```
+
+Not terrible, certainly not so skewed that I'm worried.
+
+\newpage
+
+#### One last try... Log area vs. -1/(species^0.25)
+
+```{r}
+island_species <- island_species %>%
+  mutate(
+    neg_inv_species_0.25 = -1/(Species^0.25)
+  )
+```
+
+```{r}
+ggplot(data = island_species, mapping = aes(x = log_area, y = neg_inv_species_0.25)) +
+  geom_point()
+```
+
+```{r}
+lm_fit <- lm(neg_inv_species_0.25 ~ log_area, data = island_species)
+island_species <- island_species %>%
+  mutate(
+    residual_log_inv_0.25 = residuals(lm_fit)
+  )
+
+ggplot(data = island_species, mapping = aes(x = log_area, y = residual_log_inv_0.25)) +
+  geom_point() +
+  theme_bw()
+```
+
+Variances look about equal!  No indications of non-linearity!
+
+Double check standard deviations:
+
+```{r}
+island_species %>%
+  group_by(area_grouped) %>%
+  summarize(residual_log_inv_0.25 = sd(residual_log_inv_0.25))
+```
+
+Residual standard deviations look good now.
+
+Residuals approximately normal?
+
+```{r}
+ggplot(data = island_species, mapping = aes(x = residual_log_inv_0.25)) +
+  geom_histogram()
+```
+
+Bimodal?   Skewed Left?
+
+What might 7 observations from a normal distribution look like?
+
+```{r, echo = FALSE}
+set.seed(4222)
+```
+
+```{r}
+fake_data <- data.frame(
+  x = rnorm(7 * 20),
+  group = rep(paste0("group ", 1:20), each = 7)
+)
+
+ggplot(data = fake_data, mapping = aes(x = x)) +
+  geom_histogram() +
+  facet_wrap( ~ group) +
+  theme_bw()
+```

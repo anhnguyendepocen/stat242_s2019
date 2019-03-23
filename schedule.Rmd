@@ -207,7 +207,7 @@ make_week_box("week6", FALSE, "Week 6: Feb 25 -- Mar 1",
     * **Quiz**
     * Chapter 7
         * Finish handout from last class
-        * Point estimates and confidence intervals for the mean response at a given value of the explanatory variable: [pdf](materials/20190301_predict.pdf)
+        * Point estimates and confidence intervals for the mean response at a given value of the explanatory variable: [pdf](materials/20190301_predict/20190301_predict.pdf)
         * Start Lab 7
  * **After class** please work on the following:
     * **Homework 5** due Friday Mar 1

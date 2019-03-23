@@ -1,0 +1,40 @@
+---
+title: "Anscombe's Data"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{soul}
+   - \usepackage{booktabs}
+documentclass: extarticle
+geometry: margin=0.45in
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+library(gridExtra)
+
+anscombe <- read_csv("http://www.evanlray.com/data/base_r/anscombe_quintet.csv")
+```
+
+```{r}
+head(anscombe, nrow = 2)
+fit1 <- lm(y1 ~ x1, data = anscombe)
+summary(fit1)
+
+fit2 <- lm(y2 ~ x2, data = anscombe)
+summary(fit2)
+
+fit3 <- lm(y3 ~ x3, data = anscombe)
+summary(fit3)
+
+fit4 <- lm(y4 ~ x4, data = anscombe)
+summary(fit4)
+
+fit5 <- lm(y5 ~ x5, data = anscombe)
+summary(fit5)
+```
