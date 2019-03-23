@@ -216,7 +216,7 @@ make_week_box("week6", FALSE, "Week 6: Feb 25 -- Mar 1",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week7", TRUE, "Week 7: Mar 4 -- 8",
+make_week_box("week7", FALSE, "Week 7: Mar 4 -- 8",
 "
 
 #### Mon, Mar 4
@@ -249,29 +249,36 @@ make_week_box("week9", TRUE, "Week 9: Mar 18 -- 22",
 #### Mon, Mar 18
  * **In class**, we will do the following: Start thinking about residuals.  Chapters 7 and 8
     * **No Quiz**
-    * Residuals, model fit by least squares, prediction intervals
-    * Model Checking by residuals plots
+    * Residuals, model fit by least squares, prediction intervals: [pdf](materials/20190318_SLR_residuals/20190318_residuals.pdf)
+    * Talk through Chapter 7 quizzes
 
 #### Wed, Mar 20
  * **In class**, we will do the following: Chapter 8
     * **Quiz**
-    * Model checking by residuals plots, start on transformations for simple linear regression
+    * Need to make plots before fitting models!!
+        * Part 1: [pdf](materials/20190318_SLR_residuals/20190318_anscombe_fit_summaries.pdf)
+        * Part 2: [pdf](materials/20190318_SLR_residuals/20190318_anscombe_residuals.pdf)
+    * Start on transformations for simple linear regression
+        * Example/handout: [pdf](materials/20190320_SLR_conditions_transformations/slr_transformations.pdf)
+        * Lab 8.  Solutions here: https://github.com/mhc-stat242-s2019/Lab8_solutions/blob/master/lab08_slr_transformations.pdf
 
 #### Fri, Mar 22
  * **In class**, we will do the following: Chapter 8
     * **Quiz**
-    * Transformations for simple linear regression
+    * More on transformations for simple linear regression
+        * Lab 9.  Solutions here: https://github.com/mhc-stat242-s2019/Lab9_solutions/blob/master/lab09_more_slr_transformations.pdf
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week10", FALSE, "Week 10: Mar 25 -- 29",
+make_week_box("week10", TRUE, "Week 10: Mar 25 -- 29",
 "
 
 #### Mon, Mar 15
  * **In class**, we will do the following:
     * **Quiz**
+    * A couple more minor topics from Chapter 8: refining our view of equal standard deviations, handling outliers (we will revisit in Chapter 11), and checking normality
 
 #### Wed, Mar 27
  * **In Class**, we will do the following:
