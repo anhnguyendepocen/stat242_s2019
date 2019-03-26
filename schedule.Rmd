@@ -243,7 +243,7 @@ make_week_box("week8", FALSE, "Week 8: Mar 11 -- 15",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week9", TRUE, "Week 9: Mar 18 -- 22",
+make_week_box("week9", FALSE, "Week 9: Mar 18 -- 22",
 "
 
 #### Mon, Mar 18
@@ -278,15 +278,18 @@ make_week_box("week10", TRUE, "Week 10: Mar 25 -- 29",
 #### Mon, Mar 15
  * **In class**, we will do the following:
     * **Quiz**
-    * A couple more minor topics from Chapter 8: refining our view of equal standard deviations, handling outliers (we will revisit in Chapter 11), and checking normality
+    * A couple more minor topics from Chapter 8: refining our view of equal standard deviations, handling outliers (we will revisit in Chapter 11), and checking normality [pdf](materials/20190325_slr_conditions_quadratic/slr_conditions_misc.pdf)
 
 #### Wed, Mar 27
  * **In Class**, we will do the following:
     * **Quiz**
+    * Chapters 9 and 10: Multiple regression with 1 categorical and 1 quantitative explanatory variable (2 parallel lines): [pdf](materials/20190327_two_lines/20190327_two_parallel_lines.pdf)
+    * Lab 10
 
 #### Fri, Mar 29
  * **In Class**, we will do the following:
     * **Quiz**
+    * Chapters 9 and 10: Interactions between a categorical and quantitative variable (2 non-parallel lines)
 "
   )
 ```
@@ -298,14 +301,17 @@ make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
 #### Mon, Apr 1
  * **In Class**, we will do the following:
     * **Quiz**
+    * Chapters 9 and 10: Regresion with two lines, or two quantitative explanatory variables
 
 #### Tue, Apr 3
  * **In Class**, we will do the following:
     * **Quiz**
+    * Chapters 9 and 10: Two quantitative explanatory variables
 
 #### Fri, Apr 5
  * **In Class**, we will do the following:
     * **Quiz**
+    * Chapters 9 and 10: Multiple quantitative or categorical explanatory variables
 "
   )
 ```
@@ -317,14 +323,17 @@ make_week_box("week12", FALSE, "Week 12: Apr 8 -- 12",
 #### Mon, Apr 8
  * **In Class**, we will do the following:
     * **Quiz**
+    * Chapters 9 and 10: Multiple quantitative or categorical explanatory variables
 
 #### Wed, Apr 10
  * **In Class**, we will do the following:
     * **Quiz**
+    * Chapters 9 and 10: Multiple quantitative or categorical explanatory variables
 
 #### Fri, Apr 12
  * **In Class**, we will do the following:
     * **Quiz**
+    * Chapters 9 and 10: Multiple quantitative or categorical explanatory variables
 "
   )
 ```
