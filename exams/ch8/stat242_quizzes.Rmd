@@ -96,6 +96,10 @@ ggplot(data = air_pollution, mapping = aes(x = wind, y = residual)) +
   geom_point() +
   theme_bw()
 
+ggplot(data = air_pollution, mapping = aes(x = day, y = residual)) +
+  geom_point() +
+  theme_bw()
+
 ggplot(data = air_pollution, mapping = aes(x = residual)) +
   geom_histogram() +
   theme_bw()
