@@ -1,0 +1,111 @@
+---
+title: "Two Lines, Different Slopes (Crocodiles Continued)"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{soul}
+   - \usepackage{booktabs}
+geometry: margin=0.6in
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+require(readr)
+```
+
+```{r, message = FALSE, echo = FALSE}
+# set seed and sample_frac to get both species in the first few rows.
+set.seed(123)
+
+crocs <- read_csv("http://www.evanlray.com/data/sdm4/Crocodile_lengths.csv") %>%
+  mutate(Species = factor(Species)) %>%
+  sample_frac(size = 1) %>%
+  as.data.frame()
+```
+
+We have measurements of the head length (cm) and total body length (cm) of 32 crocodiles of two different species:
+
+```{r}
+head(crocs, 3)
+```
+
+**2 lines by filtering to create separate data sets**
+
+```{r}
+aus_crocs <- crocs %>% filter(Species == "Australian")
+aus_fit <- lm(Head ~ Body, data = aus_crocs)
+summary(aus_fit)
+```
+
+```{r}
+ind_crocs <- crocs %>% filter(Species == "Indian")
+ind_fit <- lm(Head ~ Body, data = ind_crocs)
+summary(ind_fit)
+```
+
+\newpage
+
+### 1 model, 2 lines (different slopes)
+
+* Last class we used this code to fit 2 lines with the same slope:
+```{r, eval = FALSE}
+parallel_lines_fit <- lm(Head ~ Body + Species, data = crocs)
+```
+
+* To allow for different slopes, use `*` instead of `+`
+
+```{r, echo = TRUE, fig.height=2}
+two_lines_fit <- lm(Head ~ Body * Species, data = crocs)
+summary(two_lines_fit)
+
+crocs <- crocs %>%
+  mutate(
+    fitted = predict(two_lines_fit)
+  )
+
+ggplot(data = crocs) +
+  geom_point(mapping = aes(x = Body, y = Head, color = Species)) +
+  geom_line(mapping = aes(x = Body, y = fitted, color = Species))
+```
+
+* Recall that `SpeciesIndian` is an indicator variable defined as:
+$$\text{{\tt SpeciesIndian}} = \begin{cases} 1 & \text{ if the species for crocodile $i$ is Indian.} \\
+0 & \text{ otherwise (in this case, the species is Australian)} \end{cases}
+$$
+
+\newpage
+
+#### What is the estimated equation from this model?
+
+\vspace{2.5cm}
+
+#### What is the estimated equation describing the relationship between body length and head length, for Australian crocodiles?
+
+\vspace{2.5cm}
+
+#### What is the estimated equation describing the relationship between body length and head length, for Indian crocodiles?
+
+\vspace{2.5cm}
+
+#### What is the interpretation of $\widehat{\beta}_0 = 3.463$?
+
+\vspace{2.5cm}
+
+#### What is the interpretation of $\widehat{\beta}_1 = 7.075$?
+
+\vspace{2.5cm}
+
+#### What is the interpretation of $\widehat{\beta}_2 = 0.125$?
+
+\vspace{2.5cm}
+
+#### What is the interpretation of $\widehat{\beta}_3 = 0.006$?
+
+\newpage
+
+#### Using the output from the summary function, conduct a test of the claim that the *slope* of the line describing the relationship between body length and head length in the population of all Australian crocodiles is the same as the *slope* of the line describing the relationship between body length and head length in the population of all Indian crocodiles.

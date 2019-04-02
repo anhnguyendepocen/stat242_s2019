@@ -289,24 +289,24 @@ make_week_box("week10", TRUE, "Week 10: Mar 25 -- 29",
 #### Fri, Mar 29
  * **In Class**, we will do the following:
     * **Quiz**
-    * Chapters 9 and 10: Interactions between a categorical and quantitative variable (2 non-parallel lines)
+    * Chapters 9 and 10: Interactions between a categorical and quantitative variable (2 non-parallel lines): [pdf](materials/20190329_more_two_lines/20190329_two_lines.pdf)
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
+make_week_box("week11", TRUE, "Week 11: Apr 1 -- 5",
 "
 
 #### Mon, Apr 1
  * **In Class**, we will do the following:
     * **Quiz**
-    * Chapters 9 and 10: Regresion with two lines, or two quantitative explanatory variables
+    * Chapters 9 and 10: Regression with more than two lines: [pdf](materials/20190401_gt2_categories/20190401_gt2_categories.pdf)
 
-#### Tue, Apr 3
+#### Wed, Apr 3
  * **In Class**, we will do the following:
     * **Quiz**
-    * Chapters 9 and 10: Two quantitative explanatory variables
+    * Highlights from Chapter 13: Two categorical explanatory variables
 
 #### Fri, Apr 5
  * **In Class**, we will do the following:
