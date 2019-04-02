@@ -4,32 +4,37 @@ title: "Quizzes and Exams"
 
 Review materials and solutions to quizzes and exams will be posted here.
 
-+------+----------------------------------------------------------+----------------------------------------------------------+
-| Type | Description/Review Materials                             | Solutions                                                |
-+======+==========================================================+==========================================================+
-| Quiz | Chapter 1: [pdf](exams/ch1/stat242_quizzes.pdf)          | Solutions: [pdf](exams/ch1/stat242_quiz_solutions.pdf)   |
-|      |                                                          |                                                          |
-|      | The are several other topics from Chapter 1 that are also|                                                          |
-|      | important, but that didn't make it onto quizzes. Please  |                                                          |
-|      | also read the book and review in-class materials.        |                                                          |
-+------+----------------------------------------------------------+----------------------------------------------------------+
-| Quiz | Chapter 2: [pdf](exams/ch2/stat242_quizzes.pdf)          |Solutions: [pdf](exams/ch2/stat242_quiz_solutions.pdf)    |
-+------+----------------------------------------------------------+----------------------------------------------------------+
-| Quiz | Sections 2.3, 5.2, and 6.2:                              |Solutions: [pdf](exams/Ch52_62/stat242_quiz_solutions.pdf)|
-|      | [pdf](exams/Ch52_62/stat242_quizzes.pdf)                 |                                                          |
-+------+----------------------------------------------------------+----------------------------------------------------------+
-| Quiz | Sections 5.3 and 5.4:                                    |Solutions: [pdf](exams/ch53_54/stat242_quiz_solutions.pdf)|
-|      | [pdf](exams/ch53_54/stat242_quizzes.pdf)                 |                                                          |
-+------+----------------------------------------------------------+----------------------------------------------------------+
-| Quiz | Sections 5.5 and Chapter 3:                              |Solutions: [pdf](exams/ch55_3/stat242_quiz_solutions.pdf) |
-|      | [pdf](exams/ch55_3/stat242_quizzes.pdf)                  |                                                          |
-+------+----------------------------------------------------------+----------------------------------------------------------+
-| Quiz | Sections 6.3 and 6.4:                                    |Solutions: [pdf](exams/ch63_64/stat242_quiz_solutions.pdf)|
-|      | [pdf](exams/ch63_64/stat242_quizzes.pdf)                 |                                                          |
-+------+----------------------------------------------------------+----------------------------------------------------------+
-| Quiz | Chapter 7:                                               |Solutions: [pdf](exams/ch7/stat242_quiz_solutions.pdf)    |
-|      | [pdf](exams/ch7/stat242_quizzes.pdf)                     |                                                          |
-+------+----------------------------------------------------------+----------------------------------------------------------+
-| Quiz | Chapter 8:                                               |Solutions: [pdf](exams/ch8/stat242_quiz_solutions.pdf)    |
-|      | [pdf](exams/ch8/stat242_quizzes.pdf)                     |                                                          |
-+------+----------------------------------------------------------+----------------------------------------------------------+
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Type | Description/Review Materials                             | Solutions                                                     |
++======+==========================================================+===============================================================+
+| Quiz | Chapter 1: [pdf](exams/ch1/stat242_quizzes.pdf)          | Solutions: [pdf](exams/ch1/stat242_quiz_solutions.pdf)        |
+|      |                                                          |                                                               |
+|      | The are several other topics from Chapter 1 that are also|                                                               |
+|      | important, but that didn't make it onto quizzes. Please  |                                                               |
+|      | also read the book and review in-class materials.        |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Chapter 2: [pdf](exams/ch2/stat242_quizzes.pdf)          |Solutions: [pdf](exams/ch2/stat242_quiz_solutions.pdf)         |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Sections 2.3, 5.2, and 6.2:                              |Solutions: [pdf](exams/Ch52_62/stat242_quiz_solutions.pdf)     |
+|      | [pdf](exams/Ch52_62/stat242_quizzes.pdf)                 |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Sections 5.3 and 5.4:                                    |Solutions: [pdf](exams/ch53_54/stat242_quiz_solutions.pdf)     |
+|      | [pdf](exams/ch53_54/stat242_quizzes.pdf)                 |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Sections 5.5 and Chapter 3:                              |Solutions: [pdf](exams/ch55_3/stat242_quiz_solutions.pdf)      |
+|      | [pdf](exams/ch55_3/stat242_quizzes.pdf)                  |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Sections 6.3 and 6.4:                                    |Solutions: [pdf](exams/ch63_64/stat242_quiz_solutions.pdf)     |
+|      | [pdf](exams/ch63_64/stat242_quizzes.pdf)                 |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Chapter 7:                                               |Solutions: [pdf](exams/ch7/stat242_quiz_solutions.pdf)         |
+|      | [pdf](exams/ch7/stat242_quizzes.pdf)                     |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Chapter 8:                                               |Solutions: [pdf](exams/ch8/stat242_quiz_solutions.pdf)         |
+|      | [pdf](exams/ch8/stat242_quizzes.pdf)                     |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Chapters 9 and 10 - mulitple lines:                      |Solutions: [pdf](exams/ch9_10_lines/stat242_quiz_solutions.pdf)|
+|      | [pdf](exams/ch9_10_lines/stat242_quizzes.pdf)            |                                                               |
+|      | Appendix:                                                |                                                               |
+|      | [pdf](exams/ch9_10_lines/stat242_quiz_appendix.pdf)      |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
