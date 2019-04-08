@@ -59,12 +59,12 @@ I realize that this is kindof a pain!  Let me know if you run into any problems 
 |    6 (HW6)   | https://github.com/mhc-stat242-s2019/HW6.git  |           |  1    |                                                        |
 |              |                                               |           |       |                                                        |
 +--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
-|              | Use the instructions above to pull the        |           |       |                                                        |
+|              | Use the instructions above to pull the        |           |       |https://github.com/mhc-stat242-s2019/HW7_solutions.git  |
 |              | assignment into RStudio using this link for   | Midnight, |       |                                                        |
 |              | the repository URL in step 6:                 | 3/29/2019 |       |                                                        |
 |    7 (HW7)   | https://github.com/mhc-stat242-s2019/HW7.git  |           |  1    |                                                        |
 +--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
-|              | Use the instructions above to pull the        |           |       |                                                        |
+|              | Use the instructions above to pull the        |           |       |https://github.com/mhc-stat242-s2019/HW8_solutions.git  |
 |              | assignment into RStudio using this link for   | Midnight, |       |                                                        |
 |              | the repository URL in step 6:                 | 4/5/2019  |       |                                                        |
 |    8 (HW8)   | https://github.com/mhc-stat242-s2019/HW8.git  |           |  1    |                                                        |
