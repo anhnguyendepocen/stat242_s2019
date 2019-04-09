@@ -120,7 +120,7 @@ We will use `i1` (or its square root transformation) as the response and `substa
 
 #### 1. State and interpret a 95% confidence interval for the coefficient estimate labeled as `mcs` in Model 1 (see page 3 of the R appendix).  What does the phrase "95% confident" mean in this context?
 
-We are 95% confident that in the population of people similar to those in this study, a 1 unit increase in mcs while holding fixed the substance being treated is associated with a decrease in the square root of the number of alcoholic drinks consumed of between about -0.033 and -0.003.  For 95% of samples, an interval computed in this way would contain the slope of the lines in the population.
+We are 95% confident that in the population of people similar to those in this study, a 1 unit increase in mcs while holding fixed the substance being treated is associated with a decrease between about 0.033 and 0.003 in the average of the square root of the number of alcoholic drinks consumed.  For 95% of samples, an interval computed in this way would contain the slope of the lines in the population.
 
 \vspace{1cm}
 
@@ -128,11 +128,18 @@ We are 95% confident that in the population of people similar to those in this s
 
 It is estimated that in the population of people similar to those in study, the intercept of a line describing the relationship between mental component score and square root of number of drinks consumed is about 2.1 units smaller among those being treated for cocaine than for those being treated for alcohol abuse.
 
+...or...
+
+It is estimated that in the population of people similar to those in study, among those people with mental component scores of 0 the mean of the square root of the number of alcoholic drinks consumed is about 2.1 units smaller among those being treated for cocaine than for those being treated for alcohol abuse.
+
+
 \vspace{2cm}
 
 #### 3. What is the interpretation of the coefficient estimate labeled as `substancecocaine:mcs` in Model 2 (see page 4 of the R appendix).
 
 It is estimated that in the population of people similar to those in study, the slope of a line describing the relationship between mental component score and square root of number of drinks consumed is about 0.001 units larger among those being treated for cocaine than for those being treated for alcohol abuse.
+
+(I find the wording of a more direct interpretation to be laborious enough that it's not worth getting into; interpretation in terms of a difference in slopes is fine here.)
 
 \newpage
 
