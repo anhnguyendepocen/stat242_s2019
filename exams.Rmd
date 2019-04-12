@@ -33,8 +33,11 @@ Review materials and solutions to quizzes and exams will be posted here.
 | Quiz | Chapter 8:                                               |Solutions: [pdf](exams/ch8/stat242_quiz_solutions.pdf)         |
 |      | [pdf](exams/ch8/stat242_quizzes.pdf)                     |                                                               |
 +------+----------------------------------------------------------+---------------------------------------------------------------+
-| Quiz | Chapters 9 and 10 - mulitple lines:                      |Solutions: [pdf](exams/ch9_10_lines/stat242_quiz_solutions.pdf)|
+| Quiz | Chapters 9 and 10 - multiple lines:                      |Solutions: [pdf](exams/ch9_10_lines/stat242_quiz_solutions.pdf)|
 |      | [pdf](exams/ch9_10_lines/stat242_quizzes.pdf)            |                                                               |
 |      | Appendix:                                                |                                                               |
 |      | [pdf](exams/ch9_10_lines/stat242_quiz_appendix.pdf)      |                                                               |
++------+----------------------------------------------------------+---------------------------------------------------------------+
+| Quiz | Chapter 13 - 2 way ANOVA:                                |Solutions: [pdf](exams/ch13/stat242_quiz_solutions.pdf)        |
+|      | [pdf](exams/ch13/stat242_quizzes.pdf)                    |                                                               |
 +------+----------------------------------------------------------+---------------------------------------------------------------+

@@ -272,7 +272,7 @@ make_week_box("week9", FALSE, "Week 9: Mar 18 -- 22",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week10", TRUE, "Week 10: Mar 25 -- 29",
+make_week_box("week10", FALSE, "Week 10: Mar 25 -- 29",
 "
 
 #### Mon, Mar 15
@@ -295,7 +295,7 @@ make_week_box("week10", TRUE, "Week 10: Mar 25 -- 29",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week11", TRUE, "Week 11: Apr 1 -- 5",
+make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
 "
 
 #### Mon, Apr 1
@@ -305,46 +305,46 @@ make_week_box("week11", TRUE, "Week 11: Apr 1 -- 5",
 
 #### Wed, Apr 3
  * **In Class**, we will do the following:
-    * **Quiz**
-    * Highlights from Chapter 13: Two categorical explanatory variables
+    * **No Quiz**
+    * Time to work through quizzes on regression with multiple lines
 
 #### Fri, Apr 5
  * **In Class**, we will do the following:
-    * **Quiz**
-    * Chapters 9 and 10: Multiple quantitative or categorical explanatory variables
+    * **Class Cancelled**
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week12", FALSE, "Week 12: Apr 8 -- 12",
+make_week_box("week12", TRUE, "Week 12: Apr 8 -- 12",
 "
 
 #### Mon, Apr 8
  * **In Class**, we will do the following:
     * **Quiz**
-    * Chapters 9 and 10: Multiple quantitative or categorical explanatory variables
+    * Highlights from Chapter 13: 2 way ANOVA.  [pdf](materials/20190402_2_way_anova/20190403_2_way_anova.pdf)
 
 #### Wed, Apr 10
  * **In Class**, we will do the following:
     * **Quiz**
-    * Chapters 9 and 10: Multiple quantitative or categorical explanatory variables
+    * Lab 11: 2 way ANOVA
+        * Solutions [here](https://github.com/mhc-stat242-s2019/Lab11_solutions/blob/master/lab11_2_way_anova.pdf)
 
 #### Fri, Apr 12
  * **In Class**, we will do the following:
-    * **Quiz**
-    * Chapters 9 and 10: Multiple quantitative or categorical explanatory variables
+    * **Midterm 2**
 "
   )
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week13", FALSE, "Week 13: Apr 15 -- 19",
+make_week_box("week13", TRUE, "Week 13: Apr 15 -- 19",
 "
-
 #### Mon, Apr 15
  * **In Class**, we will do the following:
+    * Wrap up/answer questions on 2 way ANOVA lab (Lab 11)
     * **Quiz**
+    * Multiple regression with 2 quantitative variables
 
 #### Wed, Apr 17
  * **In Class**, we will do the following:

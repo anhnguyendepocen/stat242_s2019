@@ -1,0 +1,126 @@
+---
+title: "2 Way ANOVA (Highlights from Sleuth3 Chapter 13)"
+output:
+  pdf_document:
+    fig_height: 2.8
+    fig_width: 6
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{vwcol}
+geometry: margin=0.5in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE)
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(gridExtra)
+options(width = 100)
+```
+
+**1 way vs 2 way ANOVA**
+
+ * 1 way ANOVA model
+    * Quantitative response, categorical explanatory
+    * Each group has its own mean, data are normally distributed around the group mean
+ * 2 way ANOVA model
+    * Quantitative response, 2 categorical explanatory
+    * Each combination of groups has its own mean, data are normally distributed around the mean for that combination of groups
+ * Actually everything is just a linear model
+
+**Additive Model vs. Interactions Model**
+
+**Additive Model:** `lm(response ~ explanatory1 + explanatory2, data = data)`
+
+ * Group mean = effect from one variable + effect from second variable
+ * Visually: Difference in means for levels of variable 1 is constant across levels of variable 2
+ * Example: a calibration experiment was performed to explore the relationship between
+    * the recorded `counts` from a gas chromatograph (response) -- we use a log transformation to stabilize variance
+    * the `concentration` of a compound in a mixture (Low, Medium, or High) and the `flow_rate` through the chromatograph (Slow or Fast)
+
+```{r, echo = FALSE, message = FALSE}
+chromatography <- read_csv("http://www.evanlray.com/data/sdm3/Chapter_29/Ch29_Chromatography.csv")
+names(chromatography) <- c("concentration", "flow_rate", "counts")
+chromatography <- chromatography %>%
+  mutate(
+    concentration = factor(concentration, levels = c("Low", "Medium", "High"), labels = c("Low", "Medium", "High")),
+    log_counts = log(counts)
+  )
+```
+
+```{r, fig.height = 1.95}
+ggplot(data = chromatography, mapping = aes(x = concentration, y = log_counts, color = flow_rate)) +
+  geom_boxplot() +
+  theme_bw()
+```
+
+**Interactions Model:** `lm(response ~ explanatory1 * explanatory2, data = data)`
+
+ * Group mean = specific to combination of levels for variable 1 and 2
+ * Visually: Difference in means for levels of variable 1 varies across levels of variable 2
+ * Example: A motivated paper airplane thrower measured
+    * The `Distance` travelled (response)
+    * The `Design` (dart or glider) and whether or not flaps were put on the wings (Flaps or None)
+
+```{r, echo = FALSE, message = FALSE}
+planes <- read_csv("~/Documents/teaching/personal_site/elray1.github.io/data/sdm3/Chapter_29/Ch29_Paper_Planes.csv") %>% filter(Paper == "Copier")
+```
+
+```{r, fig.height = 1.95}
+ggplot(data = planes, mapping = aes(x = flaps, y = Distance, color = Design)) +
+  geom_boxplot() +
+  theme_bw()
+```
+
+
+\newpage
+
+## Fit group means on transformed scale
+
+```{r}
+lm_fit <- lm(log_counts ~ concentration + flow_rate, data = chromatography)
+summary(lm_fit)
+```
+
+**1. Write down the estimated equation for the mean of `log(counts)` based on concentration and flow rate.**
+
+\vspace{2cm}
+
+**2. Express each of the following estimated means in terms of coefficient estimates above:**
+
+$\hat{\mu}(log(\text{counts}) | \text{concentration = "Low", flow\_rate = "Fast"}) =$
+
+\vspace{0.05cm}
+
+$\hat{\mu}(log(\text{counts}) | \text{concentration = "Medium", flow\_rate = "Fast"}) =$
+
+\vspace{0.05cm}
+
+$\hat{\mu}(log(\text{counts}) | \text{concentration = "High", flow\_rate = "Fast"}) =$
+
+\vspace{0.05cm}
+
+$\hat{\mu}(log(\text{counts}) | \text{concentration = "Low", flow\_rate = "Slow"}) =$
+
+\vspace{0.05cm}
+
+$\hat{\mu}(log(\text{counts}) | \text{concentration = "Medium", flow\_rate = "Slow"}) =$ 
+
+\vspace{0.05cm}
+
+$\hat{\mu}(log(\text{counts}) | \text{concentration = "High", flow\_rate = "Slow"}) =$
+
+**3. Conduct a test of the claim that for a given flow rate, the mean log counts is the same at all three concentrations.**
+
+```{r}
+lm_fit_reduced <- lm(log_counts ~ flow_rate, data = chromatography)
+anova(lm_fit_reduced, lm_fit)
+```
+
