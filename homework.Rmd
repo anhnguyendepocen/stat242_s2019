@@ -69,3 +69,8 @@ I realize that this is kindof a pain!  Let me know if you run into any problems 
 |              | the repository URL in step 6:                 | 4/5/2019  |       |                                                        |
 |    8 (HW8)   | https://github.com/mhc-stat242-s2019/HW8.git  |           |  1    |                                                        |
 +--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
+|              | Use the instructions above to pull the        |           |       |                                                        |
+|              | assignment into RStudio using this link for   | Midnight, |       |                                                        |
+|              | the repository URL in step 6:                 | 4/19/2019 |       |                                                        |
+|    9 (HW9)   | https://github.com/mhc-stat242-s2019/HW9.git  |           |  1    |                                                        |
++--------------+-----------------------------------------------+-----------+-------+--------------------------------------------------------+
