@@ -1,0 +1,268 @@
+---
+title: "Chapter 11: Outliers and Influential Observations"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{soul}
+   - \usepackage{booktabs}
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+library(gridExtra)
+
+anscombe <- read_csv("http://www.evanlray.com/data/base_r/anscombe_quintet.csv")
+```
+
+### Recall Anscombe's Data
+
+```{r, echo = FALSE}
+fit1 <- lm(y1 ~ x1, data = anscombe)
+fit2 <- lm(y2 ~ x2, data = anscombe)
+fit3 <- lm(y3 ~ x3, data = anscombe)
+fit4 <- lm(y4 ~ x4, data = anscombe)
+fit5 <- lm(y5 ~ x5, data = anscombe)
+
+anscombe_long <- data.frame(
+  x = c(anscombe$x1, anscombe$x2, anscombe$x3, anscombe$x4, anscombe$x5),
+  y = c(anscombe$y1, anscombe$y2, anscombe$y3, anscombe$y4, anscombe$y5),
+  residual = c(residuals(fit1), residuals(fit2), residuals(fit3), residuals(fit4), residuals(fit5)),
+  data_set = rep(paste("Data Set", 1:5), each = nrow(anscombe))
+)
+
+grid.arrange(
+  ggplot(data = anscombe_long, mapping = aes(x = x, y = y)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    facet_wrap(~factor(data_set), nrow = 1) +
+    theme_bw(),
+  ggplot(data = anscombe_long, mapping = aes(x = x, y = residual)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    facet_wrap(~factor(data_set), nrow = 1) +
+    ylab("residual\n") +
+    theme_bw()
+)
+```
+
+* For today, let's focus on Data Sets 3 and 4
+* Definitions (note: there are not universally agreed on definitions for these terms):
+    * An **outlier** is an observation that "doesn't fit" with the patterns in the rest of the data
+        * Both data set 3 and data set 4 have outliers
+    * An **influential observation** is an observation whose removal from the data set would substantially change the model fit (coefficient estimates)
+        * Both data set 3 and data set 4 have influential observations
+        * The point in data set 4 is *more influential*
+    * A **high leverage observation** is one whose explanatory variable values are far from the explanatory variable values of other observations
+        * Data set 4 has a high leverage observation
+        * Data set 3 does not
+* Note that residual plots **exactly fail** to identify very influential/high leverage observations!!!
+
+\newpage
+
+## Leverage
+
+* If the model has 1 $X$ variable, the leverage of observation $i$ is defined to be
+
+$h_i = \frac{(X_i - \bar{X})^2}{\sum_{j=1}^n (X_j - \bar{X})^2} + \frac{1}{n}$
+
+* Basically, how far is $X_i$ from $\bar{X}$, standardized in an obsure way.
+    * $\frac{1}{n} \leq h_i \leq 1$
+    * Average of leverages is $p/n$ (where $p$ is the number of parameters for the mean in the model).
+
+* As a very rough guide, $h_i > 2p/n$ indicates an observation is worth looking into more
+
+Plots of leverage vs. observation index (code will be shown later)
+
+```{r}
+# 2p/n; p = 2 since we have beta_0 and beta_1 in our simple linear regression model
+2 * 2 / nrow(anscombe)
+```
+
+```{r, echo = FALSE, fig.height = 2}
+# find suspicious values for Data Set 3; nothing to worry about...
+anscombe <- anscombe %>%
+  mutate(
+    obs_index = row_number(),
+    h3 = hatvalues(fit3)
+  )
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = h3)) +
+  geom_point() +
+  geom_hline(yintercept = 2 * 2 / nrow(anscombe)) +
+  ylim(0, 1) +
+  ggtitle("Leverage - Data Set 3")
+```
+
+Looks OK
+
+```{r, echo = FALSE, fig.height = 2}
+# find suspicious values for Data Set 4; we should look into observation 8 more!
+anscombe <- anscombe %>%
+  mutate(
+    h4 = hatvalues(fit4)
+  )
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = h4)) +
+  geom_point() +
+  geom_hline(yintercept = 2 * 2 / nrow(anscombe)) +
+  ylim(0, 1) +
+  ggtitle("Leverage - Data Set 4")
+```
+
+```{r}
+# confirm observation 8 is the one with a big X!
+anscombe$x4[8]
+```
+
+\newpage
+
+## Studentized Residuals
+
+ * Observations with high leverage tend to have small residuals!
+    * $SD(res_i) = \sigma \sqrt{1 - h_i}$
+ * Looking at just the residuals can be misleading
+ * The **studentized residuals** adjust by dividing residual by its estimated standard deviation
+
+$studres_i = \frac{res_i}{\hat{\sigma} \sqrt{1 - h_i}}$
+
+ * A studentized residual less than -2 or greater than 2 could indicate problems **if other diagnostics also indicate issues**
+ * We expect about 5% of *studentized residuals* to be less than -2 or greater than 2.
+
+Plots of studentized residuals vs. observation index (code will be shown later)
+
+```{r, echo = FALSE, fig.height = 2}
+# find suspicious values for Data Set 3
+anscombe <- anscombe %>%
+  mutate(
+    obs_index = row_number(),
+    studres3 = rstudent(fit3)
+  )
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = studres3)) +
+  geom_point() +
+  ggtitle("Studentized Residuals - Data Set 3")
+```
+
+```{r}
+# confirm observation 3 is the one with a big Y!
+anscombe$y3[3]
+```
+
+```{r, echo = FALSE, fig.height = 2}
+# find suspicious values for Data Set 4; nothing to worry about...
+anscombe <- anscombe %>%
+  mutate(
+    obs_index = row_number(),
+    studres4 = rstudent(fit4)
+  )
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = studres4)) +
+  geom_point() +
+  ggtitle("Studentized Residuals - Data Set 4")
+```
+
+Looks OK... what's up with that warning?
+
+```{r}
+anscombe$studres4
+anscombe$h4
+```
+
+\newpage
+
+## Cook's Distance
+
+* Measures how different predicted values for all observations are when observation $i$ is or is not used for model estimation
+* Fit model using all observations; get predicted values $\hat{Y}_j$ for each $j = 1, \ldots, n$
+* Fit model using all observations **other than** $i$; get predicted values $\hat{Y}_{j(i)}$ for each $j = 1, \ldots, n$
+* $D_i = \frac{\sum_{j = 1}^n (\hat{Y}_{j(i)} - \hat{Y}_j)^2}{p \hat{\sigma}^2}$
+* As a very rough guide, $D_i > 1$ indicates an observation is worth looking into more
+
+Plots of Cook's distance vs. observation index (code will be shown later)
+
+```{r, echo = FALSE, fig.height = 2}
+# find suspicious values for Data Set 3
+anscombe <- anscombe %>%
+  mutate(
+    obs_index = row_number(),
+    D3 = cooks.distance(fit3)
+  )
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = D3)) +
+  geom_point() +
+  ggtitle("Cook's Distance - Data Set 3")
+```
+
+```{r}
+# confirm observation 3 is the one with a big Y!
+anscombe$y3[3]
+```
+
+```{r, echo = FALSE, fig.height = 2}
+# find suspicious values for Data Set 4; nothing to worry about...
+anscombe <- anscombe %>%
+  mutate(
+    obs_index = row_number(),
+    D4 = cooks.distance(fit4)
+  )
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = D4)) +
+  geom_point() +
+  ggtitle("Cook's Distance - Data Set 4")
+```
+
+Looks OK... what's up with that warning?
+
+```{r}
+anscombe$D4
+anscombe$h4
+```
+
+\newpage
+
+## R Code: Manual Plots
+
+ * Every statistical software package will give you different plots by default
+ * Our book suggests the plots we've looked at so far, which are not the defaults for R/require more code to create:
+
+```{r, fig.height = 1.75}
+anscombe <- anscombe %>%
+  mutate(
+    obs_index = row_number(),
+    h3 = hatvalues(fit3),
+    studres3 = rstudent(fit3),
+    D3 = cooks.distance(fit3)
+  )
+
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = h3)) +
+  geom_point() +
+  geom_hline(yintercept = 2 * 2 / nrow(anscombe)) +
+  ylim(0, 1) +
+  ggtitle("Leverage - Data Set 3")
+
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = studres3)) +
+  geom_point() +
+  ggtitle("Studentized Residuals - Data Set 3")
+
+ggplot(data = anscombe, mapping = aes(x = obs_index, y = D3)) +
+  geom_point() +
+  ggtitle("Cook's Distance - Data Set 3")
+```
+
+\newpage
+
+## R Code: Default Plots
+
+You can get a set of different diagnostic plots more easily, but I find the plot involving Cook's distance and Leverage less intuitive:
+
+```{r, fig.height = 4, fig.width = 4}
+plot(fit3)
+```
+
+Note: to get the plots to all show up in the knitted pdf, I had to set figure height and width in the code chunk declaration:
+
+````markdown
+`r ''````{r, fig.height = 4, fig.width = 4}
+````
+

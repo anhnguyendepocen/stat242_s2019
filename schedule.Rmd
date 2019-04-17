@@ -344,15 +344,20 @@ make_week_box("week13", TRUE, "Week 13: Apr 15 -- 19",
  * **In Class**, we will do the following:
     * Wrap up/answer questions on 2 way ANOVA lab (Lab 11)
     * **Quiz**
-    * Multiple regression with 2 quantitative variables
+    * Quadratic Regression: [pdf](materials/20190415_quadratic_reg/20190415_quadratic_reg.pdf)
+    * Lab 12.
 
 #### Wed, Apr 17
  * **In Class**, we will do the following:
     * **Quiz**
+    * Diagnostics for outliers/high leverage observations: [pdf](materials/20190417_regression_diagnostics/20190417_residual_diagnostics.pdf)
+    * Start on multiple regression, pairs plots, added variable plots: [pdf](materials/20190417_regression_diagnostics/20190417_avPlots.pdf)
 
 #### Fri, Apr 19
  * **In Class**, we will do the following:
     * **Quiz**
+    * Finish handouts from April 17
+    * Lab 13
 "
   )
 ```
