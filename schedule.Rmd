@@ -322,7 +322,7 @@ make_week_box("week12", TRUE, "Week 12: Apr 8 -- 12",
 #### Mon, Apr 8
  * **In Class**, we will do the following:
     * **Quiz**
-    * Highlights from Chapter 13: 2 way ANOVA.  [pdf](materials/20190402_2_way_anova/20190403_2_way_anova.pdf)
+    * Highlights from Chapter 13: 2 way ANOVA.  [pdf](materials/20190403_2_way_anova/20190403_2_way_anova.pdf)
 
 #### Wed, Apr 10
  * **In Class**, we will do the following:
