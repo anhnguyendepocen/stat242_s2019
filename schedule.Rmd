@@ -316,7 +316,7 @@ make_week_box("week11", FALSE, "Week 11: Apr 1 -- 5",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week12", TRUE, "Week 12: Apr 8 -- 12",
+make_week_box("week12", FALSE, "Week 12: Apr 8 -- 12",
 "
 
 #### Mon, Apr 8
@@ -363,20 +363,23 @@ make_week_box("week13", TRUE, "Week 13: Apr 15 -- 19",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week14", FALSE, "Week 14: Apr 22 -- 26",
+make_week_box("week14", TRUE, "Week 14: Apr 22 -- 26",
 "
 
 #### Mon, Apr 22
  * **In Class**, we will do the following:
-    * **Quiz**
+    * Multiple regression, multicollinearity, and variable selection: [pdf](materials/20190422_multicollinearity/20190422_multicollinearity.pdf)
+    * The original article: [pdf](materials/20190422_multicollinearity/Ericksen.pdf)
 
 #### Wed, Apr 24
  * **In Class**, we will do the following:
     * **Quiz**
+    * Start on Lab 14
 
 #### Fri, Apr 26
  * **In Class**, we will do the following:
-    * **Quiz**
+    * **No Quiz**
+    * Finish Lab 14
 "
   )
 ```
@@ -387,7 +390,9 @@ make_week_box("week15", FALSE, "Week 15: Apr 29 -- 30",
 
 #### Mon, Apr 29
  * **In Class**, we will do the following:
-    * **Quiz**
+    * **No Quiz**
+    * No new material covered.
+    * I will answer any questions you have.
 "
   )
 ```

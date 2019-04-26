@@ -1,0 +1,398 @@
+---
+title: "Chapter 12: Multicollinearity, Model Selection"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{soul}
+   - \usepackage{booktabs}
+geometry: margin=0.6in
+classoption: landscape
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+library(gridExtra)
+library(carData)
+
+options(width = 160)
+
+census <- carData::Ericksen %>%
+  transmute(
+    name = rownames(.),
+    minority = minority,
+    crime = crime,
+    poverty = poverty,
+    language = language,
+    highschool = highschool,
+    housing = housing,
+    geographic_unit = city,
+    conventional = conventional,
+    undercount = undercount
+  )
+```
+
+## Context
+
+#### Intro to data
+
+Our data set comes from Ericksen et al. (1989), who were expert witnesses in a US Supreme Court case about corrections to the U.S. Census undercount.  (The descriptive text here quotes from that article.)  This is important because Census numbers are used in many ways throughout the government, including setting the amount of funding that is passed from the federal government to those locations.  Several cities and states sued the U.S. Census Bureau, to correct the census results.  One of the arguments made was that census undercounts were primarily concentrated in regions with high prevalence of minorities.
+
+We have measurements on 66 different regions in the U.S.: 16 large cities, the remaining parts of the states in which these cities are located, and the other U.S. states.  For each of these regions, we have:
+
+ * `name`: The name of the region.
+ * `minority`: Percentage black or Hispanic.
+ * `crime`: Rate of serious crimes per 1000 population.
+ * `poverty`: Percentage poor.
+ * `language`: Percentage having difficulty speaking or writing English.
+ * `highschool`: Percentage age 25 or older who had not finished highschool.
+ * `housing`: Percentage of housing in small, multiunit buildings.
+ * `geographic_unit`: "city" or "state".
+ * `conventional`: Percentage of households counted by conventional personal enumeration (the method in primary use up until about 1950, and used less in 1980).
+ * `undercount`: Preliminary estimate of percentage undercount, based on a second survey.
+
+```{r, eval = TRUE}
+head(census, 3)
+```
+
+References:
+
+ * Fox, J. and Weisberg, S. (2011) An R Companion to Applied Regression, Second Edition, Sage.
+ * Ericksen, E. P., Kadane, J. B. and Tukey, J. W. (1989) Adjusting the 1980 Census of Population and Housing. *Journal of the American Statistical Association* 84, 927–944.
+
+Let's consider a model for `undercount` (response) based on all of the other explanatory variables in the data set (other than the name of the location).
+
+#### Pairs Plots
+
+```{r, message = FALSE, eval = TRUE, fig.width=10, fig.height = 7.5}
+library(GGally)
+ggpairs(census %>% select(-name))
+```
+
+\newpage
+
+```{r, eval=TRUE}
+census_transformed <- census %>%
+  transmute(
+    minority = minority^0.75,
+    crime = log(crime),
+    poverty = sqrt(poverty),
+    language = sqrt(language),
+    highschool = highschool,
+    housing = log(housing),
+    geographic_unit = geographic_unit,
+    conventional = log(conventional + 1),
+    undercount = undercount
+  )
+```
+
+```{r, message = FALSE, eval = TRUE, fig.width=7.5, fig.height = 5}
+ggpairs(census_transformed)
+```
+
+\newpage
+
+## Challenge: Multicollinearity
+
+ * **Multicollinearity:** Some of the explanatory variables are linearly associated with each other.  Effects:
+    * Apparent association between a given explanatory variable and the response can change if we add or remove other explanatory variables from the model.
+    * Standard errors of coefficient estimates are large.
+        * We are not certain of the coefficient value: which of the correlated explanatory variables is actually responsible for changes in the response?
+        * This can lead to small t statistics/large p-values even if a variable is associated with the response.
+
+#### Illustration, focusing on just the crime and housing explanatory variables
+
+```{r, eval = TRUE, fig.width=7.5, fig.height = 5}
+ggpairs(census_transformed %>% select(crime, housing, undercount))
+```
+
+\newpage
+
+```{r, eval = TRUE, fig.width=7.5, fig.height = 5}
+lm_highschool <- lm(undercount ~ crime, data = census_transformed)
+summary(lm_highschool)
+
+lm_poverty <- lm(undercount ~ housing, data = census_transformed)
+summary(lm_poverty)
+
+lm_highschool_poverty <- lm(undercount ~ crime + housing, data = census_transformed)
+summary(lm_highschool_poverty)
+```
+
+\newpage
+
+```{r, eval = TRUE, fig.width=7.5, fig.height = 2}
+p1 <- ggplot(data = census_transformed, mapping = aes(x = crime, y = undercount)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+
+p2 <- ggplot(data = census_transformed, mapping = aes(x = housing, y = undercount)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_bw()
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+```{r, message = FALSE, eval = TRUE, fig.width=7.5, fig.height = 3}
+library(car)
+avPlots(lm_highschool_poverty)
+```
+
+\newpage
+
+## A model with all the explanatory variables
+
+```{r, eval = TRUE}
+bigfit <- lm(undercount ~ minority + crime + poverty + language + highschool + housing + geographic_unit + conventional,
+    data = census_transformed)
+summary(bigfit)
+```
+
+It seems like we probably don't need all of those variables in the model.
+
+\newpage
+
+#### Variance Inflation Factors
+
+ * "How much larger is the variance of $\hat{\beta}_j$ than it would be if all explanatory variables were uncorrelated?"
+
+```{r, eval = TRUE}
+vif(bigfit)
+```
+
+ * A VIF of $4$ means our confidence interval for that coefficient is twice as wide as it would be if all explanatory variables were uncorrelated.
+
+\vspace{3cm}
+
+ * As a rough guide, a VIF $> 5$ indicates we may want to do something to address multicollinearity.
+    * In this class, that means drop explanatory variables that don't help the model but do inflate variances
+    * Other strategies include principle components analysis and penalized regression; see stat 340/other classes!
+ * $VIF = \frac{1}{1 - R_X^2}$, where $R_X^2$ is the $R^2$ of the regression of the given explanatory variable on all other explanatory variables.
+
+## Which explanatory variables should we include in our model?
+
+Note: this topic will be explored in much more depth in Statistics 340.  We introduce some first ideas here.
+
+#### Basic Motivations
+
+ * Need **enough**:
+    * Include all the important variables we are interested in/necessary to answer our scientific questions
+    * Include any important potential confounding variables
+ * But **not too many**:
+    * Try to avoid including highly correlated explanatory variables, unless we really need them.
+ * Acknowledge **there is no perfect model**:
+    * We will probably identify multiple sets of explanatory variables that are about as good as each other.
+    * We should present results from all of these models (or a representative group of them).
+ * Our goal is **not** to find models that support our favorite theories/get us statistically significant results/etc.!
+ * **Our goal is to see what the data can and can not tell us about what we're studying**
+
+\newpage
+
+#### All Subsets Regression
+
+ * Fit every possible model based on all the different subsets of explanatory variables
+    * Model with only minority
+    * ...all other models with one explanatory variable...
+    * Model with minority and crime
+    * ...all other models with 2, 3, 4, 5, 6, or 7 explanatory variables...
+    * Model with all 8 explanatory variables
+ * Pick "best" models to discuss
+
+```{r, eval = TRUE}
+library(leaps)
+candidate_models <- regsubsets(
+  undercount ~ minority + crime + poverty + language + highschool + housing + geographic_unit + conventional,
+  data = census_transformed,
+  nbest = 1)
+summary(candidate_models)
+```
+
+ * For a particular number of explanatory variables, "best" models have smallest sum of squared residuals
+ * How should we select the number of explanatory variables to use?
+
+\newpage
+
+#### *Not* by looking for smallest sum of squared residuals
+
+ * Adding more explanatory variables will *always* reduce sum of squared residuals, but may not give a better model
+
+```{r, eval = TRUE}
+summary(candidate_models)$rss
+```
+
+#### *Not* by looking for largest $R^2$
+
+ * Adding more explanatory variables will *always* increase $R^2$, but may not give a better model
+
+```{r, eval = TRUE}
+summary(candidate_models)$rsq
+```
+
+#### One Option: BIC
+
+ * We want a criterion that says "Make the Residual Sum of Squares small, but don't include too many explanatory variables"
+ * Bayesian Information Criterion:  Minimize
+$$BIC = n \times \log\left( \frac{\text{Sum of Squared Residuals}}{n} \right) + \log(n) \times (p + 1)$$
+ * The first term is small if the Sum of Squared Residuals is small
+ * The second term is small if the number of explanatory variables, $p$, is small
+
+```{r, eval = TRUE}
+summary(candidate_models)$bic
+```
+
+```{r, eval = TRUE}
+plot(candidate_models)
+```
+
+ * Generally, models with BIC within about 2 of the smallest BIC are equivalent in terms of utility.
+    * We should report on **all 3** of the models with lowest BIC here.
+ * We could also look at more than 1 "best model" of each size
+
+```{r, eval = TRUE, fig.height = 5}
+candidate_models3 <- regsubsets(
+  undercount ~ minority + crime + poverty + language + highschool + housing + geographic_unit + conventional,
+  data = census_transformed,
+  nbest = 3)
+plot(candidate_models3)
+summary(candidate_models3)$bic %>%
+  sort()
+```
+
+ * In an actual analysis, I would examine and report on **all 6** of the models with lowest BIC.  (Not doing that here for the sake of time/space/our attention spans.)
+
+\newpage
+
+## Finishing off the analysis
+
+#### We have 3 candidate models - which findings, if any, are robust to the covariates included?
+
+```{r, eval = TRUE}
+fit1 <- lm(
+  undercount ~ minority + poverty + geographic_unit + conventional,
+  data = census_transformed)
+summary(fit1)
+confint(fit1)
+```
+
+\newpage
+
+```{r, eval = TRUE}
+fit2 <- lm(
+  undercount ~ minority + crime + conventional,
+  data = census_transformed)
+summary(fit2)
+confint(fit2)
+```
+
+\newpage
+
+```{r, eval = TRUE}
+fit3 <- lm(
+  undercount ~ minority + poverty + language + geographic_unit + conventional,
+  data = census_transformed)
+summary(fit3)
+confint(fit3)
+```
+
+\newpage
+
+#### Do we have any outliers or high leverage observations?
+
+ * I will look at just the most complex model here.  The story would probably be the same for the other models, but in an analysis in preparation for publication I would examine these results for all models.
+
+```{r, eval = TRUE, fig.height = 2}
+census_transformed <- census_transformed %>%
+  mutate(
+    obs_index = row_number(),
+    h3 = hatvalues(fit3),
+    studres3 = rstudent(fit3),
+    D3 = cooks.distance(fit3)
+  )
+
+ggplot(data = census_transformed, mapping = aes(x = obs_index, y = h3)) +
+  geom_point() +
+  geom_hline(yintercept = 2 * 6 / nrow(census_transformed)) +
+  ylim(0, 1) +
+  ggtitle("Leverage - Fit 3")
+
+ggplot(data = census_transformed, mapping = aes(x = obs_index, y = studres3)) +
+  geom_point() +
+  ggtitle("Studentized Residuals - Fit 3")
+
+ggplot(data = census_transformed, mapping = aes(x = obs_index, y = D3)) +
+  geom_point() +
+  ggtitle("Cook's Distance - Fit 3")
+```
+
+Yes.  Are our findings robust to whether or not these observations are included?
+
+```{r, eval = TRUE}
+suspicious_obs <- c(31, 40, 58, 66)
+census_transformed_nosuspicious <- census_transformed[-suspicious_obs, ]
+
+fit3_nosuspicious <- lm(
+  undercount ~ minority + poverty + language + geographic_unit + conventional,
+  data = census_transformed_nosuspicious)
+
+summary(fit3_nosuspicious)
+confint(fit3_nosuspicious)
+```
+
+How about residuals diagnostics for linearity/normality/etc?
+
+```{r, eval = TRUE, fig.height=2}
+census_transformed <- census_transformed %>%
+  mutate(
+    residual = residuals(fit3),
+    suspicious = row_number() %in% suspicious_obs
+  )
+
+ggplot(data = census_transformed, mapping = aes(x = minority, y = residual, color = suspicious)) +
+  geom_point()
+
+ggplot(data = census_transformed, mapping = aes(x = poverty, y = residual, color = suspicious)) +
+  geom_point()
+
+ggplot(data = census_transformed, mapping = aes(x = language, y = residual, color = suspicious)) +
+  geom_point()
+
+ggplot(data = census_transformed, mapping = aes(x = residual, color = geographic_unit, color = suspicious)) +
+  geom_density()
+
+census_transformed %>%
+  group_by(geographic_unit) %>%
+  summarize(sd(residual))
+
+ggplot(data = census_transformed, mapping = aes(x = conventional, y = residual, color = suspicious)) +
+  geom_point()
+```
+
+\newpage
+
+#### What are our conclusions?
+
+ * We found consistent and strong evidence that higher concentrations of minorities and higher rates of use of conventional census methods were both associated with larger census undercounts, after controlling for the other covariates selected for inclusion in the model.
+ * We also found consistent and strong evidence that census undercounts were larger in large cities than in the other parts of those states or other states taken as a whole, after accounting for the associations of other covariates with census undercounts.
+ * These findings were robust to the covariates included in our model, and held whether or not four outlying high leverage observations were included.
+ * We saw less consistent associations between census undercounts and the poverty rate, crime rate, and rate at which residents had difficulty speaking or writing in English, after controlling for the associations found above.  These variables were not always included in models selected by BIC, and the strength of evidence of an association with the census undercount depended on which other covariates were included and whether or not high leverage observations were included.
+ * This is an observational study and our findings are limited in scope to the particular regions included in the analysis, and to the procedures used 1980 Census.
+
+#### In the authors' words...
+
+* Here's what they said about their variable selection procedure
+
+\includegraphics[width=8in]{Ericksen_var_selection.png}
+
+* Here is the first paragraph of the conclusions:
+
+\includegraphics[width=4in]{Ericksen_conclusions.png}
+
+* Here is a statement of the scope of conclusions, second paragraph of conclusions:
+
+\includegraphics[width=4in]{Ericksen_scope.png}
