@@ -346,6 +346,7 @@ make_week_box("week13", TRUE, "Week 13: Apr 15 -- 19",
     * **Quiz**
     * Quadratic Regression: [pdf](materials/20190415_quadratic_reg/20190415_quadratic_reg.pdf)
     * Lab 12.
+    * Lab 12 solutions: https://github.com/mhc-stat242-s2019/Lab12_solutions
 
 #### Wed, Apr 17
  * **In Class**, we will do the following:
@@ -358,6 +359,7 @@ make_week_box("week13", TRUE, "Week 13: Apr 15 -- 19",
     * **Quiz**
     * Finish handouts from April 17
     * Lab 13
+    * Lab 13 solutions: https://github.com/mhc-stat242-s2019/Lab13_solutions
 "
   )
 ```
@@ -386,7 +388,7 @@ make_week_box("week14", TRUE, "Week 14: Apr 22 -- 26",
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week15", FALSE, "Week 15: Apr 29 -- 30",
+make_week_box("week15", TRUE, "Week 15: Apr 29 -- 30",
 "
 
 #### Mon, Apr 29
