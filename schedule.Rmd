@@ -356,7 +356,7 @@ make_week_box("week13", TRUE, "Week 13: Apr 15 -- 19",
 
 #### Fri, Apr 19
  * **In Class**, we will do the following:
-    * **Quiz**
+    * **No Quiz**
     * Finish handouts from April 17
     * Lab 13
     * Lab 13 solutions: https://github.com/mhc-stat242-s2019/Lab13_solutions
